@@ -9,6 +9,7 @@ import FlavorHero from './components/FlavorHero'
 import ShopPage from './components/ShopPage'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ReelsSection from './components/ReelsSection'
 import CustomerReviews from './components/CustomerReviews'
 
 import { flavors } from './data/flavors'
@@ -124,6 +125,7 @@ export default function App() {
             <FlavorHero current={current} />
           </div>
           <CustomerReviews />
+          <ReelsSection />
           <Footer />
         </>
       )}
