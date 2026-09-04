@@ -1,34 +1,427 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
 
-:root {
-  --bg-cream: #F5EFE6;
-  --bg-cream-highlight: #FFFDF9;
-  --bg-cream-dark: #DDD2C0;
-  color-scheme: light;
+* {
+  box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #f5efe6;
+  font-family: "Inter", sans-serif;
+}
+
+/* =========================================================
+   MAIN HERO
+========================================================= */
+
+.hero-scene {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+  min-height: 680px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(ellipse at 50% 46%,
+      #f7b9c8 0%,
+      #f8d4dc 19%,
+      #f8e4e3 37%,
+      #f7eee7 64%,
+      #f5efe6 100%);
+
+  perspective: 1400px;
+}
+
+/* =========================================================
+   PINK ATMOSPHERIC LIGHT
+========================================================= */
+
+.hero-background-glow {
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  left: 50%;
+  top: 48%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: rgba(234, 83, 123, 0.18);
+
+  filter: blur(100px);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.hero-background-glow-secondary {
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  left: 51%;
+  top: 45%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: rgba(255, 183, 202, 0.35);
+
+  filter: blur(70px);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+/* =========================================================
+   STRAWBERRY FIELD
+========================================================= */
+
+.strawberry-layer {
+  position: absolute;
+
+  inset: 0;
+
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
+
   overflow: hidden;
-  background-color: var(--bg-cream);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  user-select: none;
-  -webkit-font-smoothing: antialiased;
+
+  pointer-events: none;
+
+  transform-style: preserve-3d;
+
+  z-index: 1;
 }
 
-/* Studio radial gradient backdrop subtly darkening towards the edges */
-.studio-backdrop {
-  background: radial-gradient(
-    circle at 50% 46%,
-    #FFFDF9 0%,
-    #FAF5EE 35%,
-    #F5EFE6 65%,
-    #E8DFD1 90%,
-    #DDD2C0 100%
-  );
+.floating-strawberry {
+  position: absolute;
+
+  object-fit: contain;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  transform-style: preserve-3d;
+
+  will-change: transform, filter;
+}
+
+/* =========================================================
+   MAIN PRODUCT STAGE
+========================================================= */
+
+.hero-product-stage {
+  position: relative;
+
+  z-index: 5;
+
+  width: min(720px, 58vw);
+  height: min(760px, 86vh);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  perspective: 1400px;
+
+  transform-style: preserve-3d;
+}
+
+/* =========================================================
+   FLOOR SHADOW
+========================================================= */
+
+.product-floor-shadow {
+  position: absolute;
+
+  width: 52%;
+  height: 13%;
+
+  bottom: 13%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: rgba(74, 25, 35, 0.22);
+
+  filter: blur(28px);
+
+  z-index: 0;
+}
+
+/* =========================================================
+   PRODUCT
+========================================================= */
+
+.hero-product {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform-style: preserve-3d;
+
+  will-change: transform;
+
+  transition: transform 0.2s ease-out;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  user-select: none;
+
+  transform:
+    translateZ(70px) scale(1.12);
+
+  transform-style: preserve-3d;
+
+  filter:
+    drop-shadow(0 34px 34px rgba(82, 21, 34, 0.23)) drop-shadow(0 8px 12px rgba(82, 21, 34, 0.13));
+
+  will-change: transform;
+}
+
+/* =========================================================
+   LEFT TEXT
+========================================================= */
+
+.hero-copy {
+  position: absolute;
+
+  left: 7.2%;
+  bottom: 12%;
+
+  z-index: 10;
+
+  width: 370px;
+
+  text-align: left;
+}
+
+.hero-eyebrow {
+  margin: 0 0 12px;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.28em;
+
+  color: rgba(125, 70, 82, 0.62);
+}
+
+.hero-copy h1 {
+  margin: 0;
+
+  font-family: "DM Serif Display", serif;
+
+  font-size: clamp(48px, 5vw, 76px);
+
+  line-height: 0.88;
+
+  font-weight: 400;
+
+  letter-spacing: -0.045em;
+
+  color: #b51e53;
+}
+
+.hero-copy h1 span {
+  display: block;
+
+  font-style: italic;
+
+  color: #bd2c5d;
+}
+
+.hero-tagline {
+  width: 280px;
+
+  margin: 22px 0 0;
+
+  font-size: 13px;
+
+  line-height: 1.65;
+
+  font-weight: 300;
+
+  color: rgba(104, 70, 76, 0.68);
+}
+
+/* =========================================================
+   DISCOVER
+========================================================= */
+
+.discover {
+  position: absolute;
+
+  right: 6.5%;
+  bottom: 10%;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  color: rgba(119, 76, 86, 0.55);
+
+  font-size: 9px;
+
+  letter-spacing: 0.3em;
+
+  font-weight: 500;
+}
+
+.discover-line {
+  width: 48px;
+  height: 1px;
+
+  background: rgba(119, 76, 86, 0.35);
+}
+
+/* =========================================================
+   DESKTOP LARGE SCREENS
+========================================================= */
+
+@media (min-width: 1400px) {
+  .hero-product-stage {
+    width: 700px;
+    height: 760px;
+  }
+
+  .hero-copy {
+    left: 7%;
+    bottom: 11%;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .hero-product-stage {
+    width: 72vw;
+    height: 72vh;
+  }
+
+  .hero-copy {
+    left: 5%;
+    bottom: 7%;
+
+    width: 300px;
+  }
+
+  .hero-copy h1 {
+    font-size: 52px;
+  }
+
+  .hero-tagline {
+    font-size: 12px;
+  }
+
+  .discover {
+    right: 5%;
+    bottom: 7%;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .hero-scene {
+    min-height: 100svh;
+    height: 100svh;
+
+    align-items: flex-start;
+  }
+
+  .hero-product-stage {
+    width: 112vw;
+    height: 66vh;
+
+    margin-top: 2vh;
+  }
+
+  .product-image {
+    transform:
+      translateZ(25px) scale(1.05);
+  }
+
+  .hero-copy {
+    left: 7%;
+
+    bottom: 8%;
+
+    width: 250px;
+  }
+
+  .hero-copy h1 {
+    font-size: 43px;
+  }
+
+  .hero-eyebrow {
+    font-size: 9px;
+
+    letter-spacing: 0.2em;
+  }
+
+  .hero-tagline {
+    width: 230px;
+
+    margin-top: 15px;
+
+    font-size: 11px;
+  }
+
+  .discover {
+    display: none;
+  }
+
+  /* Keep foreground strawberries visible */
+  .floating-strawberry {
+    transform: scale(0.75);
+  }
 }

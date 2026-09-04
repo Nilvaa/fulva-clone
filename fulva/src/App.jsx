@@ -1,40 +1,54 @@
-import { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import HalwaMorph from './components/HalwaMorph'
+import { useState, useEffect } from 'react'
+import './App.css'
+
+import Header from './components/Header'
+import FlavorHero from './components/FlavorHero'
+import ShopPage from './components/ShopPage'
+import Contact from './components/Contact'
+
+import { flavors } from './data/flavors'
+
+const SLIDE_DURATION = 4000 // ms
 
 export default function App() {
+  const [index, setIndex] = useState(0)
+  const [view, setView] = useState('home') // 'home' | 'shop' | 'contact'
+
+  useEffect(() => {
+    // Pause flavor cycling on Shop and Contact pages
+    if (view !== 'home') return
+
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % flavors.length)
+    }, SLIDE_DURATION)
+
+    return () => clearInterval(timer)
+  }, [view])
+
+  const current = flavors[index]
+
   return (
-    <main className="relative w-screen h-screen overflow-hidden studio-backdrop">
-      {/* Full-Viewport React Three Fiber Canvas */}
-      <Canvas
-        dpr={[1, 2]}
-        camera={{ position: [0, 0, 3.8], fov: 42 }}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference: 'high-performance',
-        }}
-        className="w-full h-full"
-      >
-        {/* Soft Ambient Light for overall studio visibility */}
-        <ambientLight intensity={1.0} color="#FFF9F2" />
+    <main className="relative w-screen min-h-screen overflow-x-hidden">
 
-        {/* The 3D Image Dissolve & Particle Morph Hero Scene */}
-        <Suspense fallback={null}>
-          <HalwaMorph />
-        </Suspense>
+      <Header
+        accentColor={current.accent}
+        onShopClick={() => setView('shop')}
+        onContactClick={() => setView('contact')}
+        onLogoClick={() => setView('home')}
+      />
 
-        {/* Post-Processing Bloom for Dissolve Edge Sparkles */}
-        <EffectComposer disableNormalPass multisampling={0}>
-          <Bloom
-            luminanceThreshold={0.65}
-            luminanceSmoothing={0.35}
-            intensity={1.15}
-            mipmapBlur
-          />
-        </EffectComposer>
-      </Canvas>
+      {view === 'home' && (
+        <FlavorHero current={current} />
+      )}
+
+      {view === 'shop' && (
+        <ShopPage />
+      )}
+
+      {view === 'contact' && (
+        <Contact />
+      )}
+
     </main>
   )
 }
