@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-cream: #F5EFE6;
+  --bg-cream-highlight: #FFFDF9;
+  --bg-cream-dark: #DDD2C0;
+  color-scheme: light;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--bg-cream);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Studio radial gradient backdrop subtly darkening towards the edges */
+.studio-backdrop {
+  background: radial-gradient(
+    circle at 50% 46%,
+    #FFFDF9 0%,
+    #FAF5EE 35%,
+    #F5EFE6 65%,
+    #E8DFD1 90%,
+    #DDD2C0 100%
+  );
+}
