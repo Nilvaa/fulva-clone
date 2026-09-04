@@ -256,9 +256,60 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 100;
   background: transparent;
+  padding: 16px 48px;
+  transition: background 0.3s ease, padding 0.3s ease;
 }
+
+@media (max-width: 700px) {
+  .site-header {
+    padding: 12px 18px;
+  }
+}
+
+/* =========================================================
+   DARK THEME HEADER (CINEMATIC HERO)
+   ========================================================= */
+
+.site-header.is-dark .nav-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.site-header.is-dark .nav-pill-link {
+  color: #f5efe6;
+}
+
+.site-header.is-dark .nav-pill-link:hover,
+.site-header.is-dark .nav-pill-link:focus {
+  background: var(--nav-accent, #c89d3c);
+  color: #0d0807;
+}
+
+.site-header.is-dark .icon-btn {
+  color: #f5efe6;
+}
+
+.site-header.is-dark .cart-count {
+  color: #f5efe6;
+}
+
+.site-header.is-dark .track-order-btn {
+  border-color: rgba(212, 175, 55, 0.45);
+  color: #f5efe6;
+}
+
+.site-header.is-dark .track-order-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: #d4af37;
+}
+
+.site-header.is-dark .menu-toggle span {
+  background: #f5efe6;
+}
+
 
 .site-header-inner {
   position: relative;

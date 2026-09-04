@@ -1,0 +1,253 @@
+/* =========================================================
+   GOLDEN SILK CURTAIN — SCROLL-DRIVEN CINEMATIC TRANSITION
+   ========================================================= */
+
+/*
+  Layout architecture:
+  .silk-wrapper     → tall div that provides scroll distance (300vh)
+  .silk-sticky      → position: sticky — stays in viewport
+  .silk-panel       → the silk curtain, translated by JS
+  .silk-content-below → content revealed beneath (Onam section)
+*/
+
+.silk-wrapper {
+  position: relative;
+  /* 3x viewport height gives enough scroll room for the animation */
+  height: 300vh;
+  width: 100%;
+  /* Contain the sticky child */
+  overflow: clip;
+}
+
+.silk-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Content Beneath the Curtain ── */
+.silk-content-below {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+/* ── Canvas: draws the goldencurtain-jpg frame sequence ── */
+.silk-canvas-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  pointer-events: none; /* clicks pass through to Onam content below */
+  display: block;
+  /*
+    The goldencurtain-jpg frames were extracted from a GIF whose transparent
+    regions were rasterised as black (#000) in the JPG export.
+    mix-blend-mode: screen makes black pixels transparent (0+x=x) while
+    the bright golden silk pixels remain fully visible over the Onam section.
+  */
+  mix-blend-mode: screen;
+}
+
+/* ── The Silk Panel (LEGACY — CSS gradient, not used for frame sequence) ── */
+.silk-panel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  will-change: transform;
+  /* GPU-friendly — only transform is animated */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+
+/* ── Silk Base: rich golden-amber satin ── */
+.silk-base {
+  position: absolute;
+  inset: 0;
+  /* Multi-stop satin gradient — vertical folds */
+  background:
+    linear-gradient(
+      90deg,
+      #5c3a00 0%,
+      #a0640a 6%,
+      #d4af37 14%,
+      #f5d879 20%,
+      #c89828 28%,
+      #9e6e08 34%,
+      #d4af37 40%,
+      #f8e17a 48%,
+      #c8940e 56%,
+      #b07d10 62%,
+      #d4af37 70%,
+      #f5da70 76%,
+      #c28c10 84%,
+      #a07010 90%,
+      #c8a02a 96%,
+      #7a5000 100%
+    );
+}
+
+/* ── Fabric weave texture (subtle) ── */
+.silk-weave {
+  position: absolute;
+  inset: 0;
+  /* Thin repeating horizontal lines to simulate woven texture */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.04) 0px,
+      rgba(0,0,0,0.04) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  mix-blend-mode: overlay;
+}
+
+/* ── Static Highlight Folds ── */
+.silk-highlight-1,
+.silk-highlight-2,
+.silk-highlight-3 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.silk-highlight-1 {
+  left: 18%;
+  width: 6%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 248, 180, 0.35) 50%,
+    transparent 100%
+  );
+  filter: blur(3px);
+}
+
+.silk-highlight-2 {
+  left: 48%;
+  width: 5%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 245, 160, 0.28) 50%,
+    transparent 100%
+  );
+  filter: blur(4px);
+}
+
+.silk-highlight-3 {
+  left: 74%;
+  width: 4%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 250, 190, 0.22) 50%,
+    transparent 100%
+  );
+  filter: blur(3px);
+}
+
+/* ── Moving Specular Sheen ── */
+.silk-sheen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 220, 0.18) 30%,
+    rgba(255, 255, 255, 0.38) 50%,
+    rgba(255, 255, 220, 0.18) 70%,
+    transparent 100%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+  /* JS updates left position for the sweep */
+  transition: left 0.08s linear;
+}
+
+/* ── Edge Depth Shadows ── */
+.silk-edge-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 6%;
+  background: linear-gradient(90deg, rgba(40, 20, 0, 0.55), transparent);
+  pointer-events: none;
+}
+
+.silk-edge-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 6%;
+  background: linear-gradient(270deg, rgba(40, 20, 0, 0.55), transparent);
+  pointer-events: none;
+}
+
+/* ── Brand Mark on Curtain ── */
+.silk-brand-mark {
+  position: absolute;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  pointer-events: none;
+  z-index: 2;
+  /* Subtle embossed look */
+  text-shadow:
+    0 1px 0 rgba(255, 240, 160, 0.45),
+    0 -1px 0 rgba(60, 30, 0, 0.6),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.silk-brand-name {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(42px, 7vw, 88px);
+  letter-spacing: -0.04em;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(80, 45, 0, 0.65);
+  user-select: none;
+}
+
+.silk-brand-dot {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(48px, 8vw, 96px);
+  color: rgba(90, 50, 0, 0.55);
+  line-height: 1;
+  user-select: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .silk-wrapper {
+    /* Slightly shorter scroll distance on mobile */
+    height: 250vh;
+  }
+}

@@ -9,6 +9,8 @@ export default function Header({
     onShopClick,
     onContactClick,
     onLogoClick,
+    onAssortedClick,
+    isDark = false,
 }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const cartCount = 0; // wire up to real cart state later
@@ -17,13 +19,14 @@ export default function Header({
         e.preventDefault();
 
         if (link === "Shop") onShopClick?.();
-        if (link === "Contact") onContactClick?.();
+        if (link === "Contact" || link === "Contact Us") onContactClick?.();
+        if (link === "Assorted") onAssortedClick?.();
 
         if (closeMenu) setMenuOpen(false);
     };
 
     return (
-        <header className="site-header">
+        <header className={`site-header ${isDark ? "is-dark" : ""}`}>
             <div className="site-header-inner">
                 <img
                     src={logo}

@@ -1,0 +1,505 @@
+/* =========================================================
+   CINEMATIC INTRO HERO — AUTOPLAY LUXURY EXPERIENCE
+   ========================================================= */
+
+.cinematic-hero-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 640px;
+  overflow: hidden;
+  background-color: #080504;
+  color: #fbf7f2;
+  user-select: none;
+}
+
+/* Full-screen cinematic video */
+.cinematic-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  /* No controls, no UI */
+  pointer-events: none;
+}
+
+.cinematic-video--ready {
+  opacity: 1;
+}
+
+/* Subtle Vignette & Ambient Light Overlays */
+.cinematic-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent 50%,
+    rgba(5, 3, 2, 0.45) 85%,
+    rgba(5, 3, 2, 0.8) 100%
+  );
+}
+
+.cinematic-ambient-glow {
+  position: absolute;
+  width: 60vw;
+  height: 60vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(180, 110, 40, 0.04) 40%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================================================
+   STORYTELLING OVERLAYS (AUTOPLAY TIMELINE)
+   ========================================================= */
+
+.cinematic-overlay-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(20px, 4vw, 48px);
+}
+
+/* Common Story Card styling */
+.cinematic-story-card {
+  position: absolute;
+  max-width: 480px;
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.cinematic-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #c89d3c;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.cinematic-eyebrow-line {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: #c89d3c;
+  opacity: 0.6;
+}
+
+.cinematic-title {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(34px, 4.2vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: #fbf7f2;
+  margin: 0 0 16px 0;
+  font-weight: 400;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.cinematic-title em {
+  font-style: italic;
+  color: #e6c575;
+}
+
+.cinematic-desc {
+  font-size: clamp(13px, 1.2vw, 15px);
+  line-height: 1.65;
+  color: rgba(245, 239, 230, 0.78);
+  font-weight: 300;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* Phase Specific Positions */
+/* Phase 1: Intro — Bottom Left */
+.phase-1 {
+  bottom: clamp(40px, 9vh, 90px);
+  left: clamp(24px, 7vw, 90px);
+}
+
+/* Phase 2: Silk Movement — Top Left */
+.phase-2 {
+  top: clamp(100px, 18vh, 160px);
+  left: clamp(24px, 7vw, 90px);
+}
+
+/* Phase 3: Orbit Gathering — Bottom Right */
+.phase-3 {
+  bottom: clamp(40px, 10vh, 100px);
+  right: clamp(24px, 7vw, 90px);
+  text-align: right;
+}
+.phase-3 .cinematic-eyebrow {
+  flex-direction: row-reverse;
+}
+
+/* Phase 4: Convergence Alchemy — Top Right */
+.phase-4 {
+  top: clamp(100px, 18vh, 160px);
+  right: clamp(24px, 7vw, 90px);
+  text-align: right;
+}
+.phase-4 .cinematic-eyebrow {
+  flex-direction: row-reverse;
+}
+
+/* Phase 5: Final Reveal & Hero — Bottom Left */
+.phase-5 {
+  bottom: clamp(30px, 7vh, 70px);
+  left: clamp(20px, 6vw, 80px);
+  max-width: 540px;
+}
+
+.phase-5 .cinematic-title {
+  font-size: clamp(36px, 4.6vw, 62px);
+  line-height: 1.02;
+}
+
+/* Actions in Phase 5 */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.btn-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 30px;
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #120a07;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(212, 175, 55, 0.45);
+  filter: brightness(1.05);
+}
+
+.btn-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #fbf7f2;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-hero-secondary:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: #d4af37;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   SKIP INTRO BUTTON (LUXURY DISCREET)
+   ========================================================= */
+
+.skip-intro-btn {
+  position: absolute;
+  top: 90px;
+  right: clamp(24px, 5vw, 60px);
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(18, 10, 7, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 9999px;
+  color: rgba(245, 239, 230, 0.85);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skip-intro-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: #d4af37;
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.skip-intro-arrow {
+  transition: transform 0.25s ease;
+}
+
+.skip-intro-btn:hover .skip-intro-arrow {
+  transform: translateX(3px);
+}
+
+/* Subtle Timeline Progress Pill */
+.cinematic-progress-pill {
+  position: absolute;
+  bottom: 24px;
+  right: clamp(24px, 5vw, 60px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(18, 10, 7, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 9999px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: rgba(212, 175, 55, 0.85);
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 12;
+  transition: opacity 0.4s ease;
+}
+
+.cinematic-progress-bar {
+  width: 38px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.cinematic-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #b8860b, #e6c575);
+}
+
+/* Scroll indicator when settled */
+.hero-scroll-prompt {
+  position: absolute;
+  bottom: 28px;
+  right: clamp(24px, 6vw, 70px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(245, 239, 230, 0.65);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 500;
+  pointer-events: none;
+  animation: fadeInPrompt 0.8s ease forwards;
+}
+
+.hero-scroll-prompt-line {
+  width: 32px;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-scroll-prompt-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #d4af37;
+  animation: scrollLineSweep 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollLineSweep {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes fadeInPrompt {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   LUXURY MINIMAL PRELOADER
+   ========================================================= */
+
+.cinematic-preloader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #080504;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.cinematic-preloader.loaded {
+  opacity: 0;
+}
+
+.preloader-brand {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 46px;
+  letter-spacing: -0.04em;
+  color: #fbf7f2;
+  margin-bottom: 24px;
+}
+
+.preloader-brand span {
+  color: #d4af37;
+}
+
+.preloader-bar-wrap {
+  width: 140px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.preloader-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #b8860b, #f3d789);
+  transition: width 0.2s ease-out;
+}
+
+.preloader-status {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 230, 0.45);
+  margin-top: 14px;
+}
+
+/* =========================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .phase-1,
+  .phase-2,
+  .phase-5 {
+    left: clamp(20px, 5vw, 40px);
+  }
+
+  .phase-3,
+  .phase-4 {
+    right: clamp(20px, 5vw, 40px);
+  }
+
+  .cinematic-story-card {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cinematic-story-card {
+    max-width: 90vw;
+  }
+
+  .phase-1 {
+    bottom: 80px;
+    left: 20px;
+  }
+
+  .phase-2 {
+    top: 90px;
+    left: 20px;
+  }
+
+  .phase-3 {
+    bottom: 80px;
+    right: 20px;
+  }
+
+  .phase-4 {
+    top: 90px;
+    right: 20px;
+  }
+
+  .phase-5 {
+    bottom: 45px;
+    left: 20px;
+    right: 20px;
+    max-width: calc(100vw - 40px);
+  }
+
+  .hero-cta-group {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    padding: 12px 22px;
+    font-size: 12px;
+    flex: 1 1 auto;
+  }
+
+  .skip-intro-btn {
+    top: 75px;
+    right: 18px;
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+
+  .cinematic-progress-pill {
+    display: none;
+  }
+}
