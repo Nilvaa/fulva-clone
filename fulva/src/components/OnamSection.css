@@ -6,8 +6,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 120px 60px 100px;
-  /* Base color shown before bg image loads */
+  padding: 80px 60px 80px;
   background-color: #050d18;
   background-size: cover;
   background-position: center center;
@@ -15,6 +14,20 @@
   color: #fbf7f2;
   overflow: hidden;
   box-sizing: border-box;
+}
+
+/* Dark overlay so text reads clearly over the festive background */
+.onam-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 8, 18, 0.72) 0%,
+    rgba(5, 13, 24, 0.62) 40%,
+    rgba(5, 13, 24, 0.55) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Background Ambient Glows & Kasavu / Pattern Accents */
@@ -175,37 +188,51 @@
 }
 
 /* =========================================================
-   ONAM PRODUCT CARDS GRID
+   ONAM CAROUSEL
    ========================================================= */
 
-.onam-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-top: 10px;
+/* Stage — full viewport width, clips side-card overflow */
+.onam-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0 64px;
 }
 
-.onam-card {
+/* Track: cards positioned absolutely around center */
+.onam-carousel-track {
   position: relative;
-  background: rgba(14, 28, 48, 0.55);
+  width: 100%;
+  height: 660px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* ── Individual Cards ── */
+.onam-card {
+  position: absolute;
+  width: 480px;
+  background: rgba(8, 18, 30, 0.88);
   border: 1px solid rgba(212, 175, 55, 0.22);
-  border-radius: 20px;
+  border-radius: 22px;
   overflow: hidden;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
   display: flex;
   flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.35s ease,
-              box-shadow 0.35s ease;
+  will-change: transform, opacity;
 }
 
-.onam-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(212, 175, 55, 0.55);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55),
-              0 0 28px rgba(212, 175, 55, 0.15);
+/* Center / Active card emphasis */
+.onam-card--active {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(212, 175, 55, 0.28),
+    0 0 40px rgba(212, 175, 55, 0.10);
 }
 
 /* Badge (e.g. 25% OFF, LIMITED EDITION) */
@@ -214,7 +241,7 @@
   top: 16px;
   left: 16px;
   z-index: 5;
-  padding: 6px 12px;
+  padding: 6px 14px;
   background: linear-gradient(135deg, #b8860b 0%, #8b6508 100%);
   color: #ffffff;
   font-size: 10px;
@@ -222,7 +249,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   border-radius: 999px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
 .onam-card-badge.gold {
@@ -230,24 +257,25 @@
   color: #071322;
 }
 
-/* Image Showcase */
+/* Image showcase — tall, impactful */
 .onam-card-media {
   position: relative;
   width: 100%;
-  height: 280px;
+  height: 380px;
   overflow: hidden;
-  background: #091a2e;
+  background: #060f1c;
+  flex-shrink: 0;
 }
 
 .onam-card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.onam-card:hover .onam-card-img {
-  transform: scale(1.06);
+.onam-card--active .onam-card-img {
+  transform: scale(1.04);
 }
 
 .onam-card-media-overlay {
@@ -255,15 +283,15 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(7, 19, 34, 0) 60%,
-    rgba(7, 19, 34, 0.95) 100%
+    rgba(6, 15, 28, 0) 55%,
+    rgba(6, 15, 28, 0.92) 100%
   );
   pointer-events: none;
 }
 
 /* Card Body */
 .onam-card-body {
-  padding: 24px;
+  padding: 24px 28px 26px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -271,8 +299,8 @@
 
 .onam-card-weight {
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #e5c158;
   margin-bottom: 6px;
@@ -280,18 +308,18 @@
 
 .onam-card-title {
   font-family: "DM Serif Display", Georgia, serif;
-  font-size: 24px;
-  line-height: 1.15;
+  font-size: 28px;
+  line-height: 1.12;
   color: #fbf7f2;
   margin: 0 0 10px;
   font-weight: 400;
 }
 
 .onam-card-subtitle {
-  font-size: 13px;
-  line-height: 1.55;
-  color: rgba(245, 239, 230, 0.7);
-  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.58;
+  color: rgba(245, 239, 230, 0.75);
+  margin: 0 0 18px;
   flex-grow: 1;
 }
 
@@ -300,8 +328,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 18px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: auto;
 }
 
 .onam-price-group {
@@ -312,14 +341,14 @@
 
 .onam-price-current {
   font-family: "DM Serif Display", Georgia, serif;
-  font-size: 22px;
+  font-size: 26px;
   color: #ffffff;
   font-weight: 400;
 }
 
 .onam-price-original {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.38);
   text-decoration: line-through;
 }
 
@@ -327,28 +356,132 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 18px;
+  padding: 10px 20px;
   background: rgba(212, 175, 55, 0.14);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.45);
   color: #e5c158;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 999px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
 }
 
 .onam-card-btn:hover {
   background: #d4af37;
   color: #071322;
-  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
   transform: translateY(-1px);
 }
 
+/* Side-card tap hint */
+.onam-card-side-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(229, 193, 88, 0.55);
+  pointer-events: none;
+}
+
+/* ── Navigation Arrows ── */
+.onam-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fbf7f2;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+}
+
+.onam-nav:hover {
+  background: rgba(212, 175, 55, 0.22);
+  border-color: rgba(212, 175, 55, 0.6);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.onam-nav--prev { left: -60px; }
+.onam-nav--next { right: -60px; }
+
+/* ── Dot Indicators ── */
+.onam-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.onam-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(229, 193, 88, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.onam-dot--active {
+  background: #e5c158;
+  transform: scale(1.35);
+}
+
+/* ── Feature Icons Bar ── */
+.onam-features-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 60px;
+  padding: 24px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.onam-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 32px;
+  color: rgba(245, 239, 230, 0.6);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.onam-feature svg {
+  flex-shrink: 0;
+  color: rgba(229, 193, 88, 0.7);
+}
+
+.onam-feature-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
 /* =========================================================
-   RESPONSIVE ADJUSTMENTS
+   RESPONSIVE
    ========================================================= */
 
 @media (max-width: 1100px) {
@@ -356,20 +489,26 @@
     padding: 100px 36px 80px;
   }
 
-  .onam-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+  .onam-nav--prev { left: -44px; }
+  .onam-nav--next { right: -44px; }
+
+  .onam-features-bar {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .onam-feature-divider {
+    display: none;
+  }
+
+  .onam-feature {
+    padding: 0 16px;
   }
 }
 
 @media (max-width: 700px) {
   .onam-section {
     padding: 80px 20px 60px;
-  }
-
-  .onam-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
   }
 
   .onam-header {
@@ -390,4 +529,24 @@
     width: 100%;
     justify-content: center;
   }
+
+  .onam-carousel-track {
+    height: 480px;
+  }
+
+  .onam-card {
+    width: 280px;
+  }
+
+  .onam-card-media {
+    height: 240px;
+  }
+
+  .onam-nav--prev { left: 4px; }
+  .onam-nav--next { right: 4px; }
+
+  .onam-features-bar {
+    display: none;
+  }
 }
+

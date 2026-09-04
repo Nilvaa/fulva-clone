@@ -54,37 +54,34 @@ function getOffset(i, active, total) {
   return raw;
 }
 
-// Per-offset visual configuration
+// Per-offset visual configuration — flat layered carousel (no 3D rotateY)
 function cardConfig(offset) {
   switch (offset) {
-    case 0: // center / active
+    case 0: // center / active — large, sharp, dominant
       return {
         x: "0%",
         scale: 1,
         opacity: 1,
         zIndex: 10,
-        rotateY: 0,
         filter: "none",
         cursor: "default",
       };
-    case -1: // left
-    case 1: // right
+    case -1: // left — smaller, behind, partially visible
+    case 1: // right — smaller, behind, partially visible
       return {
-        x: offset === -1 ? "-68%" : "68%",
-        scale: 0.78,
-        opacity: 0.55,
+        x: offset === -1 ? "-62%" : "62%",
+        scale: 0.80,
+        opacity: 0.80,
         zIndex: 5,
-        rotateY: offset * -12,
-        filter: "brightness(0.7)",
+        filter: "brightness(0.82)",
         cursor: "pointer",
       };
     default: // hidden / far
       return {
         x: offset < 0 ? "-110%" : "110%",
-        scale: 0.6,
+        scale: 0.65,
         opacity: 0,
         zIndex: 1,
-        rotateY: offset * -18,
         filter: "brightness(0.4)",
         cursor: "pointer",
       };
@@ -213,14 +210,13 @@ export default function OnamSection({ onShopClick }) {
                     x: cfg.x,
                     scale: cfg.scale,
                     opacity: cfg.opacity,
-                    rotateY: cfg.rotateY,
                     filter: cfg.filter,
                   }}
                   transition={{
                     type: "spring",
-                    stiffness: 260,
-                    damping: 30,
-                    mass: 0.9,
+                    stiffness: 220,
+                    damping: 32,
+                    mass: 0.85,
                   }}
                   onClick={() => !isCenter && isSide && goTo(i)}
                   tabIndex={isSide ? 0 : -1}
@@ -323,6 +319,29 @@ export default function OnamSection({ onShopClick }) {
                 onClick={() => goTo(i)}
               />
             ))}
+          </div>
+        </div>
+
+        {/* ── Feature icons bar ── */}
+        <div className="onam-features-bar" aria-hidden="true">
+          <div className="onam-feature">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3c0 0-4.5 4-4.5 8.25a4.5 4.5 0 0 0 9 0C16.5 7 12 3 12 3Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v16.5" /></svg>
+            <span>Authentic Kerala Taste</span>
+          </div>
+          <div className="onam-feature-divider" />
+          <div className="onam-feature">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="8" width="18" height="13" rx="2" /><path strokeLinecap="round" d="M7 8V6a5 5 0 0 1 10 0v2" /></svg>
+            <span>Premium Gifting</span>
+          </div>
+          <div className="onam-feature-divider" />
+          <div className="onam-feature">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="3" /><path strokeLinecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" /></svg>
+            <span>Festive Special</span>
+          </div>
+          <div className="onam-feature-divider" />
+          <div className="onam-feature">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z" /></svg>
+            <span>Handcrafted with Love</span>
           </div>
         </div>
       </div>
