@@ -3,7 +3,7 @@ import './App.css'
 
 import Header from './components/Header'
 import CinematicIntroHero from './components/CinematicIntroHero'
-import GoldenSilkCurtain from './components/GoldenSilkCurtain'
+
 import OnamSection from './components/OnamSection'
 import FlavorHero from './components/FlavorHero'
 import ShopPage from './components/ShopPage'
@@ -118,10 +118,7 @@ export default function App() {
             onExploreClick={handleExploreClick}
             onIntroComplete={handleIntroComplete}
           />
-          {/* Golden Silk Curtain → Onam Section reveal */}
-          <GoldenSilkCurtain>
-            <OnamSection onShopClick={handleShopClick} />
-          </GoldenSilkCurtain>
+          <OnamSection onShopClick={handleShopClick} />
           <div id="flavors-section">
             <FlavorHero current={current} />
           </div>
