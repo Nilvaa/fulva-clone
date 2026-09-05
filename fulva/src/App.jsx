@@ -5,6 +5,7 @@ import Header from './components/Header'
 import CinematicIntroHero from './components/CinematicIntroHero'
 
 import OnamSection from './components/OnamSection'
+import PopularProducts from './components/PopularProducts'
 import FlavorHero from './components/FlavorHero'
 import ShopPage from './components/ShopPage'
 import Contact from './components/Contact'
@@ -121,6 +122,7 @@ export default function App() {
             onIntroComplete={handleIntroComplete}
           />
           <OnamSection onShopClick={handleShopClick} />
+          <PopularProducts onShopClick={handleShopClick} />
           <div id="flavors-section">
             <FlavorHero current={current} />
           </div>
