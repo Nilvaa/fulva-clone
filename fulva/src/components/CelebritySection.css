@@ -1,0 +1,691 @@
+/* =========================================================
+   FULVA — LOVED BY ICONS
+   CINEMATIC CELEBRITY REEL SECTION
+========================================================= */
+
+.celebrity-section {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    overflow: hidden;
+
+    background:
+        radial-gradient(ellipse at 50% 48%,
+            rgba(201, 166, 83, 0.10) 0%,
+            rgba(201, 166, 83, 0.035) 28%,
+            transparent 62%),
+        linear-gradient(180deg,
+            #080706 0%,
+            #0c0907 50%,
+            #070605 100%);
+
+    color: #f4ead7;
+    padding: 40px 0 32px;
+
+    border-top: 1px solid rgba(201, 166, 83, 0.12);
+    border-bottom: 1px solid rgba(201, 166, 83, 0.12);
+}
+
+
+/* =========================================================
+   ATMOSPHERIC GLOWS
+========================================================= */
+
+.celebrity-bg-glow {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+}
+
+.celebrity-bg-glow-left {
+    width: 430px;
+    height: 300px;
+    left: -220px;
+    top: 45%;
+    background: rgba(128, 78, 38, 0.55);
+}
+
+.celebrity-bg-glow-right {
+    width: 430px;
+    height: 300px;
+    right: -220px;
+    top: 48%;
+    background: rgba(84, 40, 58, 0.42);
+}
+
+.celebrity-bg-glow-center {
+    width: 520px;
+    height: 420px;
+    left: 50%;
+    top: 46%;
+    transform: translate(-50%, -50%);
+    background: rgba(201, 166, 83, 0.08);
+}
+
+
+/* =========================================================
+   INNER CONTAINER
+========================================================= */
+
+.celebrity-inner {
+    position: relative;
+    z-index: 2;
+    width: min(1400px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.celebrity-heading {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 16px;
+}
+
+.celebrity-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 6px;
+    color: #c9a653;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+}
+
+.celebrity-eyebrow span {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 166, 83, 0.8));
+}
+
+.celebrity-eyebrow span:last-child {
+    background: linear-gradient(90deg, rgba(201, 166, 83, 0.8), transparent);
+}
+
+.celebrity-heading h2 {
+    margin: 0;
+    color: #f4ead7;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+}
+
+.celebrity-heading h2 em {
+    color: #d4b15c;
+    font-style: italic;
+}
+
+.celebrity-heading p {
+    max-width: 580px;
+    margin: 8px auto 0;
+    color: rgba(244, 234, 215, 0.6);
+    font-family: Inter, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CELEBRITY SELECTOR
+========================================================= */
+
+.celebrity-selector-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.celebrity-selector {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 48px;
+}
+
+.celebrity-person {
+    position: relative;
+    width: 120px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    text-align: center;
+    font-family: inherit;
+}
+
+.celebrity-photo-wrap {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 5px;
+    border-radius: 50%;
+    padding: 3px;
+    border: 1px solid rgba(244, 234, 215, 0.22);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.celebrity-photo-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: grayscale(0.35) brightness(0.82);
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+/* Active photo */
+.celebrity-person.active .celebrity-photo-wrap {
+    border-color: rgba(201, 166, 83, 0.9);
+    box-shadow: 0 0 0 1px rgba(201, 166, 83, 0.25), 0 0 20px rgba(201, 166, 83, 0.3), 0 0 40px rgba(201, 166, 83, 0.15);
+    transform: scale(1.08);
+}
+
+.celebrity-person.active .celebrity-photo-wrap img {
+    filter: grayscale(0) brightness(1.05);
+    transform: scale(1.02);
+}
+
+.celebrity-photo-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 166, 83, 0.55);
+    box-shadow: 0 0 14px rgba(201, 166, 83, 0.2);
+    pointer-events: none;
+}
+
+/* Active Indicator Dot under selector button */
+.celebrity-active-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #c9a653;
+    margin: 4px auto 0;
+    box-shadow: 0 0 8px #c9a653;
+}
+
+/* Downward Connector Arrow */
+.celebrity-connector-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4px;
+    margin-bottom: 2px;
+    color: #c9a653;
+    font-size: 13px;
+    opacity: 0.75;
+    animation: connectorPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes connectorPulse {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(3px);
+        opacity: 1;
+    }
+}
+
+/* Role & Name */
+.celebrity-role {
+    margin-top: 3px;
+    color: #c9a653;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.celebrity-role span {
+    margin-right: 4px;
+    font-size: 8px;
+}
+
+.celebrity-name {
+    margin-top: 3px;
+    color: rgba(244, 234, 215, 0.65);
+    font-family: Inter, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: color 0.35s ease;
+}
+
+.celebrity-person.active .celebrity-name {
+    color: #f4ead7;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   REEL AREA & STAGE (PERFECTLY CENTERED)
+========================================================= */
+
+.celebrity-reel-area {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 420px;
+}
+
+.celebrity-reel-stage {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+}
+
+
+/* =========================================================
+   REEL CARD (EXACT CENTER ALIGNMENT)
+========================================================= */
+
+.celebrity-reel-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -135px;
+    margin-top: -205px;
+    width: 270px;
+    height: 410px;
+    transform-origin: center center;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #15110e;
+    border: 1px solid rgba(201, 166, 83, 0.18);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.52);
+    will-change: transform, opacity, filter;
+}
+
+.celebrity-reel-card video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Side reel treatment */
+.celebrity-reel-card.side {
+    border-color: rgba(201, 166, 83, 0.1);
+}
+
+.celebrity-reel-card.side .celebrity-reel-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.7));
+}
+
+.celebrity-reel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 40%, rgba(0, 0, 0, 0.85) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Active gold border */
+.celebrity-active-border {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    border-radius: 20px;
+    border: 1px solid rgba(201, 166, 83, 0.7);
+    box-shadow: inset 0 0 0 1px rgba(255, 236, 178, 0.1), 0 0 24px rgba(201, 166, 83, 0.12);
+    pointer-events: none;
+}
+
+/* Side play button */
+.celebrity-side-play {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 5;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(244, 234, 215, 0.9);
+    color: #17120d;
+    font-size: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Active reel label - fully padded and unclipped */
+.celebrity-reel-label {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.celebrity-reel-label span {
+    display: block;
+    margin-bottom: 4px;
+    color: #d4b15c;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+}
+
+.celebrity-reel-label strong {
+    display: block;
+    color: #fff7e8;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: clamp(18px, 2vw, 23px);
+    font-weight: 400;
+    line-height: 1.15;
+    white-space: normal;
+    overflow: visible;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================================================
+   ARROWS (FLANKING THE VIEWPORT AT SIDES)
+========================================================= */
+
+.celebrity-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 25;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 166, 83, 0.55);
+    background: rgba(8, 7, 6, 0.82);
+    backdrop-filter: blur(8px);
+    color: #d4b15c;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.celebrity-arrow:hover {
+    background: rgba(201, 166, 83, 0.15);
+    border-color: rgba(227, 199, 119, 0.9);
+    color: #f4ead7;
+    box-shadow: 0 0 20px rgba(201, 166, 83, 0.2);
+    transform: translateY(-50%) scale(1.06);
+}
+
+.celebrity-arrow-left {
+    left: 20px;
+}
+
+.celebrity-arrow-right {
+    right: 20px;
+}
+
+
+/* =========================================================
+   BOTTOM INFO
+========================================================= */
+
+.celebrity-active-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.celebrity-counter {
+    color: #d4b15c;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+}
+
+.celebrity-info-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 166, 83, 0.7), transparent);
+}
+
+.celebrity-info-text {
+    color: rgba(244, 234, 215, 0.45);
+    font-family: Inter, Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+}
+
+
+/* =========================================================
+   TABLET RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+    .celebrity-selector {
+        gap: 32px;
+    }
+
+    .celebrity-reel-card {
+        width: 250px;
+        height: 380px;
+        margin-left: -125px;
+        margin-top: -190px;
+    }
+
+    .celebrity-reel-stage,
+    .celebrity-reel-area {
+        height: 390px;
+        min-height: 390px;
+    }
+
+    .celebrity-arrow-left {
+        left: 10px;
+    }
+
+    .celebrity-arrow-right {
+        right: 10px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+    .celebrity-section {
+        padding: 30px 0 20px;
+    }
+
+    .celebrity-inner {
+        width: calc(100% - 20px);
+    }
+
+    .celebrity-heading {
+        margin-bottom: 12px;
+    }
+
+    .celebrity-heading h2 {
+        font-size: 32px;
+    }
+
+    .celebrity-heading p {
+        font-size: 12px;
+        max-width: 320px;
+    }
+
+    .celebrity-selector-wrap {
+        margin-bottom: 4px;
+    }
+
+    .celebrity-selector {
+        gap: 12px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 8px 6px;
+        scrollbar-width: none;
+        width: 100%;
+    }
+
+    .celebrity-selector::-webkit-scrollbar {
+        display: none;
+    }
+
+    .celebrity-person {
+        min-width: 76px;
+        width: 76px;
+    }
+
+    .celebrity-photo-wrap {
+        width: 58px;
+        height: 58px;
+    }
+
+    .celebrity-name {
+        font-size: 9px;
+    }
+
+    .celebrity-role {
+        font-size: 7px;
+        letter-spacing: 0.14em;
+    }
+
+    .celebrity-reel-stage,
+    .celebrity-reel-area {
+        height: 350px;
+        min-height: 350px;
+    }
+
+    .celebrity-reel-card {
+        width: 220px;
+        height: 340px;
+        margin-left: -110px;
+        margin-top: -170px;
+    }
+
+    .celebrity-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .celebrity-arrow-left {
+        left: 4px;
+    }
+
+    .celebrity-arrow-right {
+        right: 4px;
+    }
+
+    .celebrity-reel-label {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .celebrity-reel-label span {
+        font-size: 7px;
+    }
+
+    .celebrity-reel-label strong {
+        font-size: 18px;
+    }
+
+    .celebrity-active-info {
+        margin-top: 8px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 430px) {
+    .celebrity-heading h2 {
+        font-size: 28px;
+    }
+
+    .celebrity-selector {
+        gap: 8px;
+    }
+
+    .celebrity-person {
+        min-width: 70px;
+        width: 70px;
+    }
+
+    .celebrity-reel-card {
+        width: 200px;
+        height: 310px;
+        margin-left: -100px;
+        margin-top: -155px;
+    }
+
+    .celebrity-reel-stage,
+    .celebrity-reel-area {
+        height: 320px;
+        min-height: 320px;
+    }
+
+    .celebrity-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .celebrity-info-text {
+        font-size: 7px;
+    }
+
+    .celebrity-info-line {
+        width: 30px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .celebrity-reel-card,
+    .celebrity-person,
+    .celebrity-photo-wrap,
+    .celebrity-photo-wrap img,
+    .celebrity-arrow {
+        transition: none !important;
+    }
+}

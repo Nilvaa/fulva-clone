@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import ReelsSection from './components/ReelsSection'
 import CustomerReviews from './components/CustomerReviews'
 import FeaturedSection from './components/FeaturedSection'
+import CelebritySection from './components/CelebritySection'
 
 import { flavors } from './data/flavors'
 
@@ -126,10 +127,11 @@ export default function App() {
           <OnamSection onShopClick={handleShopClick} />
           <PopularProducts onShopClick={handleShopClick} />
           <FeaturedSection />
+          <CelebritySection />
           <SpotlightSection />
-          <div id="flavors-section">
+          {/* <div id="flavors-section">
             <FlavorHero current={current} />
-          </div>
+          </div> */}
           <CustomerReviews />
           <ReelsSection />
           <Footer />
