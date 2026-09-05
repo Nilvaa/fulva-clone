@@ -15,6 +15,7 @@ import ReelsSection from './components/ReelsSection'
 import CustomerReviews from './components/CustomerReviews'
 import FeaturedSection from './components/FeaturedSection'
 import CelebritySection from './components/CelebritySection'
+import RecipeSection from './components/RecipeSection'
 
 import { flavors } from './data/flavors'
 
@@ -129,6 +130,7 @@ export default function App() {
           <FeaturedSection />
           <CelebritySection />
           <SpotlightSection />
+          <RecipeSection />
           {/* <div id="flavors-section">
             <FlavorHero current={current} />
           </div> */}
