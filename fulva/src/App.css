@@ -1234,6 +1234,14 @@ body {
   --fulva-text: #3e3034;
   --fulva-muted: #85767a;
   --fulva-border: rgba(84, 40, 58, 0.14);
+
+  /* Contact luxury tokens */
+  --c-gold: #c9a653;
+  --c-gold-dim: #a98232;
+  --c-ivory: #f4ead7;
+  --c-ivory-muted: rgba(244, 234, 215, 0.58);
+  --c-gold-border: rgba(201, 166, 83, 0.30);
+  --c-gold-border-lg: rgba(201, 166, 83, 0.60);
 }
 
 
@@ -1244,18 +1252,18 @@ body {
 .contact-page {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 15% 20%,
-      rgba(218, 147, 164, 0.18),
-      transparent 30%),
-    radial-gradient(circle at 85% 35%,
-      rgba(239, 190, 198, 0.2),
-      transparent 32%),
-    linear-gradient(135deg,
-      #faf5f0 0%,
-      #f7eeeb 48%,
-      #fbf7f3 100%);
+    radial-gradient(ellipse at 18% 20%,
+      rgba(201, 166, 83, 0.07) 0%,
+      transparent 44%),
+    radial-gradient(ellipse at 82% 62%,
+      rgba(140, 90, 30, 0.055) 0%,
+      transparent 38%),
+    linear-gradient(160deg,
+      #140c08 0%,
+      #0d0907 45%,
+      #080706 100%);
 
-  color: var(--fulva-text);
+  color: var(--c-ivory);
   overflow: hidden;
   position: relative;
 }
@@ -1267,24 +1275,24 @@ body {
 
 .contact-glow {
   position: absolute;
-  width: 420px;
-  height: 420px;
+  width: 520px;
+  height: 520px;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(140px);
   pointer-events: none;
-  opacity: 0.25;
+  opacity: 0.09;
 }
 
 .contact-glow-one {
-  top: 10%;
-  left: -180px;
-  background: #d997a9;
+  top: 5%;
+  left: -220px;
+  background: #c9a653;
 }
 
 .contact-glow-two {
-  top: 35%;
-  right: -200px;
-  background: #e7b9c3;
+  top: 40%;
+  right: -230px;
+  background: #a07828;
 }
 
 
@@ -1312,7 +1320,7 @@ body {
   align-items: center;
   gap: 8px;
 
-  color: var(--fulva-burgundy);
+  color: #c9a653;
 
   text-decoration: none;
 
@@ -1362,7 +1370,7 @@ body {
   align-items: center;
   gap: 12px;
 
-  color: var(--fulva-pink);
+  color: #b99a58;
 
   font-size: 12px;
   font-weight: 600;
@@ -1375,7 +1383,7 @@ body {
   width: 30px;
   height: 1px;
 
-  background: var(--fulva-pink);
+  background: #b99a58;
 }
 
 
@@ -1392,12 +1400,12 @@ body {
 
   letter-spacing: -0.045em;
 
-  color: var(--fulva-burgundy);
+  color: #f4ead7;
 }
 
 
 .contact-title em {
-  color: var(--fulva-pink);
+  color: #c9a653;
   font-weight: 400;
 }
 
@@ -1411,73 +1419,58 @@ body {
 
   line-height: 1.75;
 
-  color: var(--fulva-muted);
+  color: rgba(244, 234, 215, 0.62);
 }
 
 
 /* =========================================================
-   CONTACT FORM
-   ========================================================= */
+   FULVA CONTACT — LUXURY FORM
+========================================================= */
 
 .contact-form {
   display: flex;
   flex-direction: column;
-
   gap: 18px;
 }
-
 
 .contact-input-row {
   display: grid;
-
   grid-template-columns: 1fr 1fr;
-
   gap: 18px;
 }
-
 
 .contact-field {
   display: flex;
   flex-direction: column;
-
   gap: 8px;
 }
 
-
 .contact-field label {
   padding-left: 4px;
-
+  font-family: "Inter", sans-serif;
   font-size: 10px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.1em;
-
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-
-  color: var(--fulva-burgundy);
+  color: var(--c-gold) !important;
 }
-
 
 .contact-field input,
 .contact-field textarea {
   width: 100%;
-
   box-sizing: border-box;
 
-  border: 1px solid var(--fulva-border);
+  border: 1px solid rgba(201, 166, 83, 0.28) !important;
+  border-radius: 14px;
 
-  border-radius: 15px;
-
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(18, 12, 8, 0.82) !important;
 
   padding: 17px 20px;
 
   font-family: "Inter", sans-serif;
-
   font-size: 14px;
 
-  color: var(--fulva-text);
+  color: var(--c-ivory) !important;
 
   outline: none;
 
@@ -1487,70 +1480,66 @@ body {
     background 0.25s ease;
 }
 
-
 .contact-field input {
   height: 57px;
 }
 
-
 .contact-field textarea {
   min-height: 140px;
-
   resize: vertical;
 }
 
-
 .contact-field input::placeholder,
 .contact-field textarea::placeholder {
-  color: #aa9da0;
+  color: rgba(244, 234, 215, 0.38) !important;
 }
-
 
 .contact-field input:focus,
 .contact-field textarea:focus {
-  border-color: rgba(168, 75, 104, 0.5);
+  border-color: rgba(201, 166, 83, 0.72) !important;
 
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(22, 15, 10, 0.96) !important;
 
   box-shadow:
-    0 0 0 4px rgba(168, 75, 104, 0.07);
+    0 0 0 3px rgba(201, 166, 83, 0.08),
+    0 10px 30px rgba(0, 0, 0, 0.28);
 }
 
 
 /* =========================================================
    SEND BUTTON
-   ========================================================= */
+========================================================= */
 
 .contact-submit {
   width: 100%;
-
   height: 58px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 12px;
 
   margin-top: 5px;
 
-  border: none;
-
+  border: 1px solid rgba(232, 204, 128, 0.65) !important;
   border-radius: 999px;
 
-  background: var(--fulva-burgundy);
+  background:
+    linear-gradient(135deg,
+      #d4b15c 0%,
+      #a98232 100%) !important;
 
-  color: white;
+  color: #100c08 !important;
 
   font-family: "Inter", sans-serif;
-
   font-size: 14px;
-
-  font-weight: 600;
+  font-weight: 700;
 
   cursor: pointer;
+
+  box-shadow:
+    0 10px 28px rgba(201, 166, 83, 0.14),
+    inset 0 1px 0 rgba(255, 241, 190, 0.45);
 
   transition:
     transform 0.25s ease,
@@ -1558,235 +1547,291 @@ body {
     box-shadow 0.25s ease;
 }
 
-
 .contact-submit:hover {
   transform: translateY(-3px);
 
-  background: var(--fulva-burgundy-dark);
+  background:
+    linear-gradient(135deg,
+      #e0c36f 0%,
+      #b88f3b 100%) !important;
 
   box-shadow:
-    0 12px 30px rgba(84, 40, 58, 0.2);
+    0 14px 35px rgba(201, 166, 83, 0.24);
+}
+
+.send-arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.contact-submit:hover .send-arrow {
+  transform: translateX(4px);
 }
 
 
 /* =========================================================
    OR
-   ========================================================= */
+========================================================= */
 
 .contact-or {
   display: flex;
-
   align-items: center;
-
   gap: 14px;
-
   margin: 28px 0 20px;
 }
 
-
 .contact-or span {
   height: 1px;
-
   flex: 1;
-
-  background: rgba(84, 40, 58, 0.12);
+  background: rgba(201, 166, 83, 0.18);
 }
-
 
 .contact-or p {
   margin: 0;
 
   font-size: 11px;
-
-  color: var(--fulva-muted);
+  color: rgba(201, 166, 83, 0.60);
 
   text-transform: uppercase;
-
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
 
 /* =========================================================
-   WHATSAPP BUTTON
-   ========================================================= */
+   WHATSAPP
+========================================================= */
 
 .contact-whatsapp {
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 10px;
 
   height: 48px;
-
   padding: 0 27px;
 
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(18, 12, 8, 0.88) !important;
+  border: 1px solid rgba(201, 166, 83, 0.38) !important;
 
-  border: 1px solid var(--fulva-border);
-
-  color: var(--fulva-burgundy);
+  color: var(--c-ivory) !important;
 
   text-decoration: none;
 
   font-size: 13px;
-
   font-weight: 600;
 
   transition:
     transform 0.25s ease,
+    border-color 0.25s ease,
     background 0.25s ease;
 }
-
 
 .contact-whatsapp:hover {
   transform: translateY(-2px);
 
-  background: white;
+  border-color: rgba(201, 166, 83, 0.72) !important;
+
+  background: rgba(28, 19, 11, 0.96) !important;
+}
+
+.whatsapp-symbol {
+  color: var(--c-gold) !important;
 }
 
 
 /* =========================================================
    RIGHT SIDE
-   ========================================================= */
+========================================================= */
 
 .contact-info-section {
   padding-top: 45px;
 }
 
-
 .contact-info-heading {
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
-
 
 .contact-info-heading p {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 
   font-size: 10px;
-
   font-weight: 700;
 
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
 
-  color: var(--fulva-pink);
+  color: var(--c-gold-dim) !important;
 }
-
 
 .contact-info-heading h2 {
   margin: 0;
 
   font-family: "DM Serif Display", serif;
-
   font-size: 43px;
-
   font-weight: 400;
+  line-height: 1.05;
 
-  color: var(--fulva-burgundy);
+  color: var(--c-ivory) !important;
 }
 
 
 /* =========================================================
    CONTACT INFO CARDS
-   ========================================================= */
+========================================================= */
 
 .contact-info-card {
   display: flex;
-
   gap: 24px;
 
   padding: 30px;
+  margin-bottom: 16px;
 
-  margin-bottom: 18px;
+  border-radius: 20px;
 
-  border-radius: 25px;
+  background:
+    linear-gradient(135deg,
+      rgba(24, 16, 12, 0.96),
+      rgba(12, 8, 6, 0.98)) !important;
 
-  background: rgba(255, 255, 255, 0.74);
-
-  border: 1px solid rgba(84, 40, 58, 0.08);
+  border: 1px solid rgba(201, 166, 83, 0.25) !important;
 
   box-shadow:
-    0 16px 45px rgba(84, 40, 58, 0.06);
+    0 18px 45px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
 
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
 
   transition:
-    box-shadow 0.25s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
-
 
 .contact-info-card:hover {
+  transform: translateY(-3px);
+
   box-shadow:
-    0 22px 55px rgba(84, 40, 58, 0.1);
+    0 22px 50px rgba(0, 0, 0, 0.45);
+
+  border-color: rgba(201, 166, 83, 0.55) !important;
 }
 
+
+/* =========================================================
+   ICON
+========================================================= */
 
 .contact-icon {
   flex-shrink: 0;
 
   width: 54px;
-
   height: 54px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
-  border-radius: 17px;
+  border-radius: 14px;
 
-  background: var(--fulva-burgundy);
+  background:
+    linear-gradient(135deg,
+      #c9a653,
+      #9c762b) !important;
 
-  color: white;
+  border: 1px solid rgba(239, 211, 139, 0.55) !important;
+
+  color: #120d09 !important;
+
+  font-size: 22px;
+
+  box-shadow:
+    0 8px 20px rgba(201, 166, 83, 0.12);
 }
 
+
+/* =========================================================
+   CARD TEXT
+========================================================= */
 
 .contact-info-card h3 {
   margin: 2px 0 9px;
 
-  font-size: 16px;
-
+  font-size: 15px;
   font-weight: 600;
 
-  color: var(--fulva-burgundy-dark);
+  color: var(--c-ivory) !important;
+  letter-spacing: 0.01em;
 }
-
 
 .contact-info-card p {
   margin: 0;
 
   font-size: 14px;
+  line-height: 1.75;
 
-  line-height: 1.7;
-
-  color: var(--fulva-muted);
+  color: var(--c-ivory-muted) !important;
 }
-
 
 .contact-info-card a {
   display: inline-block;
 
   margin-top: 9px;
 
-  color: var(--fulva-pink);
+  color: var(--c-gold) !important;
 
   text-decoration: none;
 
   font-size: 13px;
-
   font-weight: 600;
-}
 
+  transition: color 0.2s ease;
+}
 
 .contact-info-card a:hover {
-  text-decoration: underline;
+  color: #e4c66e !important;
+  text-decoration: none;
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .contact-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-info-section {
+    padding-top: 20px;
+  }
+
+  .contact-info-heading h2 {
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .contact-field input,
+  .contact-field textarea {
+    border-radius: 12px;
+  }
+
+  .contact-info-card {
+    padding: 22px;
+    gap: 18px;
+  }
+
+  .contact-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
 
 /* =========================================================
    FOOTER
@@ -2903,4 +2948,32 @@ body {
     flex-direction: column;
     gap: 16px;
   }
+}
+
+/* =========================================
+   CONTACT PAGE — GOLD NAV ACTIVE / HOVER
+========================================= */
+
+.nav-pill-link:hover,
+.nav-pill-link:focus {
+  background: linear-gradient(135deg,
+      #d4b15c 0%,
+      #a98232 100%) !important;
+
+  color: #120d09 !important;
+}
+
+.nav-pill-link.active,
+.nav-pill-link[aria-current="page"] {
+  background: linear-gradient(135deg,
+      #d4b15c 0%,
+      #a98232 100%) !important;
+
+  color: #120d09 !important;
+
+  border-color: rgba(232, 204, 128, 0.75) !important;
+
+  box-shadow:
+    0 5px 18px rgba(185, 143, 48, 0.22),
+    inset 0 1px 0 rgba(255, 238, 176, 0.45);
 }
