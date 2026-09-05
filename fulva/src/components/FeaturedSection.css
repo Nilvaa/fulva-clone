@@ -1,0 +1,509 @@
+/* =========================================
+   FULVA — AS FEATURED IN
+   LIGHT LUXURY EDITORIAL SECTION
+========================================= */
+
+.featured-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    background:
+        radial-gradient(ellipse at 50% 45%,
+            rgba(201, 166, 83, 0.13) 0%,
+            rgba(201, 166, 83, 0.045) 32%,
+            transparent 68%),
+        linear-gradient(180deg,
+            #faf8f2 0%,
+            #f7f3ea 55%,
+            #f3eee2 100%);
+
+    color: #17130e;
+
+    padding: 58px 0 48px;
+
+    border-top: 1px solid rgba(201, 166, 83, 0.22);
+    border-bottom: 1px solid rgba(201, 166, 83, 0.22);
+}
+
+
+/* =========================================
+   ATMOSPHERIC GLOW
+========================================= */
+
+.featured-glow {
+    position: absolute;
+
+    width: 420px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    filter: blur(90px);
+
+    pointer-events: none;
+
+    opacity: 0.10;
+}
+
+.featured-glow-left {
+    left: -180px;
+    top: 35%;
+
+    background: #c9a653;
+}
+
+.featured-glow-right {
+    right: -180px;
+    bottom: 20%;
+
+    background: #d8bd83;
+}
+
+
+/* =========================================
+   INNER
+========================================= */
+
+.featured-inner {
+    position: relative;
+    z-index: 2;
+
+    width: min(1450px, calc(100% - 80px));
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.featured-heading {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    margin-bottom: 38px;
+}
+
+.featured-heading p {
+    margin: 0;
+
+    color: #a98232;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.28em;
+
+    white-space: nowrap;
+}
+
+.featured-line {
+    width: 55px;
+    height: 1px;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(169, 130, 50, 0.75));
+}
+
+.featured-line:last-child {
+    background:
+        linear-gradient(90deg,
+            rgba(169, 130, 50, 0.75),
+            transparent);
+}
+
+
+/* =========================================
+   CAROUSEL WRAPPER
+========================================= */
+
+.featured-carousel-wrapper {
+    position: relative;
+
+    background: transparent;
+
+    border: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================
+   NO DARK EDGE SHADOWS
+========================================= */
+
+.featured-carousel-wrapper::before,
+.featured-carousel-wrapper::after {
+    display: none;
+}
+
+
+/* =========================================
+   CAROUSEL
+========================================= */
+
+.featured-carousel {
+    position: relative;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+
+    cursor: grab;
+
+    padding: 8px 0 18px;
+
+    background: transparent;
+
+    border: none;
+
+    box-shadow: none;
+}
+
+.featured-carousel:active {
+    cursor: grabbing;
+}
+
+.featured-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================================
+   LOGO TRACK
+========================================= */
+
+.featured-track {
+    display: flex;
+
+    align-items: center;
+
+    width: max-content;
+
+    gap: 72px;
+}
+
+
+/* =========================================
+   LOGO ITEM
+========================================= */
+
+.featured-logo {
+    width: 175px;
+    height: 82px;
+
+    flex: 0 0 175px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    opacity: 1;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+/* =========================================
+   SUBTLE GOLD HALO
+========================================= */
+
+.featured-logo::before {
+    content: "";
+
+    position: absolute;
+
+    width: 165px;
+    height: 62px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(ellipse,
+            rgba(201, 166, 83, 0.10) 0%,
+            rgba(201, 166, 83, 0.035) 42%,
+            transparent 75%);
+
+    filter: blur(12px);
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================
+   GOLD DIVIDER
+========================================= */
+
+.featured-logo::after {
+    content: "";
+
+    position: absolute;
+
+    right: -36px;
+
+    width: 1px;
+    height: 29px;
+
+    background:
+        linear-gradient(180deg,
+            transparent,
+            rgba(169, 130, 50, 0.30),
+            transparent);
+}
+
+
+/* =========================================
+   ORIGINAL LOGOS
+========================================= */
+
+.featured-logo img {
+    position: relative;
+
+    z-index: 1;
+
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    /*
+       Increased from 138px × 56px
+       so the publication logos have
+       more visual presence.
+    */
+    max-width: 165px;
+    max-height: 68px;
+
+    object-fit: contain;
+
+    /*
+       IMPORTANT:
+       Preserve the original artwork.
+
+       No grayscale.
+       No brightness adjustment.
+       No contrast adjustment.
+       No recoloring.
+    */
+
+    filter: none;
+
+    opacity: 1;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.featured-logo:hover {
+    transform: translateY(-2px);
+}
+
+.featured-logo:hover img {
+    filter: none;
+
+    transform: scale(1.035);
+}
+
+
+/* =========================================
+   TRUST LINE
+========================================= */
+
+.featured-bottom {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 16px;
+
+    margin-top: 28px;
+
+    color: #514a40;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.27em;
+
+    text-transform: uppercase;
+}
+
+.featured-bottom span {
+    width: 38px;
+    height: 1px;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(169, 130, 50, 0.55),
+            transparent);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .featured-section {
+        padding: 48px 0 40px;
+    }
+
+    .featured-inner {
+        width: calc(100% - 48px);
+    }
+
+    .featured-track {
+        gap: 52px;
+    }
+
+    .featured-logo {
+        width: 150px;
+        height: 70px;
+
+        flex-basis: 150px;
+    }
+
+    .featured-logo img {
+        max-width: 140px;
+        max-height: 58px;
+    }
+
+    .featured-logo::before {
+        width: 145px;
+        height: 54px;
+    }
+
+    .featured-logo::after {
+        right: -26px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .featured-section {
+        padding: 42px 0 34px;
+    }
+
+    .featured-inner {
+        width: calc(100% - 30px);
+    }
+
+    .featured-heading {
+        gap: 12px;
+
+        margin-bottom: 28px;
+    }
+
+    .featured-heading p {
+        font-size: 8px;
+
+        letter-spacing: 0.2em;
+    }
+
+    .featured-line {
+        width: 32px;
+    }
+
+    .featured-track {
+        gap: 40px;
+    }
+
+    .featured-logo {
+        width: 120px;
+        height: 62px;
+
+        flex-basis: 120px;
+    }
+
+    .featured-logo img {
+        max-width: 112px;
+        max-height: 50px;
+    }
+
+    .featured-logo::before {
+        width: 120px;
+        height: 50px;
+
+        filter: blur(10px);
+    }
+
+    .featured-logo::after {
+        right: -20px;
+
+        height: 20px;
+    }
+
+    .featured-bottom {
+        margin-top: 22px;
+
+        font-size: 7px;
+
+        letter-spacing: 0.18em;
+
+        color: #5b544a;
+    }
+
+    .featured-bottom span {
+        width: 20px;
+    }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .featured-logo {
+        transition: none;
+    }
+
+    .featured-logo img {
+        transition: none;
+    }
+
+    .featured-carousel {
+        scroll-behavior: auto;
+    }
+}

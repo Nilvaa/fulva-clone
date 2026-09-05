@@ -6,12 +6,14 @@ import CinematicIntroHero from './components/CinematicIntroHero'
 
 import OnamSection from './components/OnamSection'
 import PopularProducts from './components/PopularProducts'
+import SpotlightSection from './components/SpotlightSection'
 import FlavorHero from './components/FlavorHero'
 import ShopPage from './components/ShopPage'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ReelsSection from './components/ReelsSection'
 import CustomerReviews from './components/CustomerReviews'
+import FeaturedSection from './components/FeaturedSection'
 
 import { flavors } from './data/flavors'
 
@@ -123,6 +125,8 @@ export default function App() {
           />
           <OnamSection onShopClick={handleShopClick} />
           <PopularProducts onShopClick={handleShopClick} />
+          <FeaturedSection />
+          <SpotlightSection />
           <div id="flavors-section">
             <FlavorHero current={current} />
           </div>
