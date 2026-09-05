@@ -1,0 +1,578 @@
+/* =========================================================
+   FULVA — AVAILABLE ACROSS INDIA
+   PREMIUM MARKETPLACE STRIP
+========================================================= */
+
+.marketplace-section {
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(ellipse at 50% 45%,
+            rgba(201, 166, 83, 0.12) 0%,
+            rgba(201, 166, 83, 0.04) 38%,
+            transparent 72%),
+        linear-gradient(180deg,
+            #faf8f2 0%,
+            #f7f3ea 55%,
+            #f3eee2 100%);
+
+    color: #17130e;
+
+    padding: 48px 0;
+
+    border-top:
+        1px solid rgba(201, 166, 83, 0.28);
+
+    border-bottom:
+        1px solid rgba(201, 166, 83, 0.28);
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.marketplace-container {
+    width: min(1480px,
+            calc(100% - 64px));
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 42px;
+}
+
+
+/* =========================================================
+   LEFT HEADING
+========================================================= */
+
+.marketplace-heading-side {
+    flex: 0 0 auto;
+
+    min-width: 290px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.marketplace-subheading {
+    color: #a98232;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.27em;
+
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   CARDS WRAPPER
+========================================================= */
+
+.marketplace-cards-wrapper {
+    flex: 1 1 auto;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   HORIZONTAL CARD ROW
+========================================================= */
+
+.marketplace-cards-scroll {
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    padding: 8px 4px 12px;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.marketplace-cards-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================================================
+   MARKETPLACE CARD
+========================================================= */
+
+.marketplace-card {
+    position: relative;
+
+    flex: 0 0 200px;
+
+    width: 200px;
+
+    height: 108px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: flex-start;
+
+    padding: 18px 25px 16px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(201, 166, 83, 0.20);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 18px rgba(35, 27, 17, 0.055);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.marketplace-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(201, 166, 83, 0.48);
+
+    box-shadow:
+        0 10px 25px rgba(35, 27, 17, 0.09);
+}
+
+
+/* =========================================================
+   "SHOP ON" LABEL
+========================================================= */
+
+.marketplace-card-label {
+    display: block;
+
+    margin-top: 0;
+
+    margin-bottom: 13px;
+
+    color: #8d8375;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   LOGO AREA
+========================================================= */
+
+.marketplace-logo-wrap {
+    width: 100%;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+}
+
+
+/* =========================================================
+   MARKETPLACE LOGOS
+========================================================= */
+
+.marketplace-logo-wrap img {
+    display: block;
+
+    height: 48px;
+    width: auto;
+
+    max-width: 180px;
+
+    object-fit: contain;
+    object-position: left center;
+}
+
+
+/* Individual logo tuning
+   keeps logos visually balanced because
+   their source dimensions differ.
+========================================================= */
+
+.marketplace-card:nth-child(1) .marketplace-logo-wrap img {
+    max-width: 158px;
+    max-height: 46px;
+}
+
+.marketplace-card:nth-child(2) .marketplace-logo-wrap img {
+    max-width: 155px;
+    max-height: 48px;
+}
+
+.marketplace-card:nth-child(3) .marketplace-logo-wrap img {
+    max-width: 150px;
+    max-height: 46px;
+}
+
+.marketplace-card:nth-child(4) .marketplace-logo-wrap img {
+    max-width: 145px;
+    max-height: 46px;
+}
+
+.marketplace-card:nth-child(5) .marketplace-logo-wrap img {
+    max-width: 158px;
+    max-height: 46px;
+}
+
+
+/* =========================================================
+   STORES CARD
+========================================================= */
+
+.marketplace-card-store {
+    flex-basis: 255px;
+
+    width: 255px;
+
+    background:
+        linear-gradient(135deg,
+            #faf3e5 0%,
+            #f4e8cf 100%);
+
+    border-color:
+        rgba(201, 166, 83, 0.52);
+
+    cursor: pointer;
+}
+
+.marketplace-card-store:hover {
+    background:
+        linear-gradient(135deg,
+            #fbf4e7 0%,
+            #f1e2c4 100%);
+
+    border-color:
+        rgba(169, 130, 50, 0.78);
+}
+
+
+/* =========================================================
+   STORE CONTENT
+========================================================= */
+
+.marketplace-store-body {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 1px;
+}
+
+.marketplace-pin-icon {
+    flex: 0 0 auto;
+
+    width: 24px;
+
+    height: 24px;
+
+    color: #a98232;
+}
+
+.marketplace-store-title {
+    color: #2c251b;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    white-space: nowrap;
+}
+
+.marketplace-arrow {
+    margin-left: auto;
+
+    color: #a98232;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 22px;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.marketplace-card-store:hover .marketplace-arrow {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .marketplace-container {
+        width: calc(100% - 44px);
+
+        gap: 28px;
+    }
+
+    .marketplace-heading-side {
+        min-width: 235px;
+    }
+
+    .marketplace-subheading {
+        font-size: 11px;
+
+        letter-spacing: 0.22em;
+    }
+
+    .marketplace-cards-scroll {
+        gap: 16px;
+    }
+
+    .marketplace-card {
+        flex-basis: 175px;
+
+        width: 175px;
+
+        height: 100px;
+
+        padding:
+            16px 20px 14px;
+    }
+
+    .marketplace-logo-wrap img {
+        max-width: 145px;
+
+        max-height: 43px;
+    }
+
+    .marketplace-card-store {
+        flex-basis: 230px;
+
+        width: 230px;
+    }
+
+    .marketplace-store-title {
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .marketplace-section {
+        padding: 34px 0;
+    }
+
+    .marketplace-container {
+        width: calc(100% - 28px);
+
+        display: block;
+    }
+
+    .marketplace-heading-side {
+        min-width: 0;
+
+        margin-bottom: 18px;
+    }
+
+    .marketplace-subheading {
+        font-size: 10px;
+
+        letter-spacing: 0.22em;
+    }
+
+    .marketplace-cards-scroll {
+        width: calc(100% + 14px);
+
+        gap: 14px;
+
+        padding:
+            4px 4px 10px;
+    }
+
+    .marketplace-card {
+        flex-basis: 165px;
+
+        width: 165px;
+
+        height: 94px;
+
+        padding:
+            15px 18px 13px;
+    }
+
+    .marketplace-card-label {
+        margin-bottom: 10px;
+
+        font-size: 9px;
+    }
+
+    .marketplace-logo-wrap {
+        height: 46px;
+    }
+
+    .marketplace-logo-wrap img {
+        max-width: 135px;
+
+        max-height: 40px;
+    }
+
+    .marketplace-card-store {
+        flex-basis: 220px;
+
+        width: 220px;
+    }
+
+    .marketplace-store-title {
+        font-size: 13px;
+    }
+
+    .marketplace-pin-icon {
+        width: 21px;
+        height: 21px;
+    }
+
+    .marketplace-arrow {
+        font-size: 19px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .marketplace-section {
+        padding: 28px 0;
+    }
+
+    .marketplace-container {
+        width: calc(100% - 20px);
+    }
+
+    .marketplace-card {
+        flex-basis: 155px;
+
+        width: 155px;
+
+        height: 90px;
+
+        padding:
+            14px 16px 12px;
+    }
+
+    .marketplace-card-label {
+        font-size: 8px;
+
+        margin-bottom: 9px;
+    }
+
+    .marketplace-logo-wrap {
+        height: 43px;
+    }
+
+    .marketplace-logo-wrap img {
+        max-width: 125px;
+
+        max-height: 37px;
+    }
+
+    .marketplace-card-store {
+        flex-basis: 205px;
+
+        width: 205px;
+    }
+
+    .marketplace-store-title {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .marketplace-card,
+    .marketplace-arrow {
+        transition: none;
+    }
+}

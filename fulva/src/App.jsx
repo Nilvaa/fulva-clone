@@ -16,6 +16,7 @@ import CustomerReviews from './components/CustomerReviews'
 import FeaturedSection from './components/FeaturedSection'
 import CelebritySection from './components/CelebritySection'
 import RecipeSection from './components/RecipeSection'
+import MarketplaceSection from './components/MarketplaceSection'
 
 import { flavors } from './data/flavors'
 
@@ -129,6 +130,7 @@ export default function App() {
           <PopularProducts onShopClick={handleShopClick} />
           <FeaturedSection />
           <CelebritySection />
+          <MarketplaceSection />
           <SpotlightSection />
           <RecipeSection />
           {/* <div id="flavors-section">
