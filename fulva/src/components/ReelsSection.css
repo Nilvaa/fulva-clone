@@ -4,13 +4,17 @@
 
 .reels-section {
     position: relative;
+
     background:
         radial-gradient(circle at 50% 0%,
             rgba(184, 145, 58, 0.08),
             transparent 42%),
         #090806;
+
     color: #f4ead3;
+
     padding: 110px 0 120px;
+
     overflow: hidden;
 }
 
@@ -19,43 +23,53 @@
     margin: 0 auto;
 }
 
+
 /* =========================================
    HEADER
 ========================================= */
 
 .reels-header {
     text-align: center;
+
     max-width: 700px;
+
     margin: 0 auto 55px;
 }
-
-
-
 
 .reels-header h2 {
     margin: 18px 0 12px;
 
     font-family: Georgia, "Times New Roman", serif;
+
     font-size: clamp(44px, 5vw, 72px);
+
     font-weight: 400;
+
     line-height: 0.95;
+
     letter-spacing: -0.035em;
 }
 
 .reels-header h2 em {
     color: #c9a653;
+
     font-style: italic;
 }
 
 .reels-header p {
     max-width: 520px;
+
     margin: 20px auto 0;
 
     color: rgba(244, 234, 211, 0.58);
+
     font-size: 13px;
+
     line-height: 1.8;
+
     letter-spacing: 0.03em;
 }
+
 
 /* =========================================
    REEL TRACK
@@ -63,18 +77,24 @@
 
 .reels-track {
     display: flex;
+
     gap: 18px;
 
     overflow-x: auto;
+
     padding: 10px 4px 25px;
 
     scrollbar-width: none;
+
     scroll-snap-type: x mandatory;
+
+    -webkit-overflow-scrolling: touch;
 }
 
 .reels-track::-webkit-scrollbar {
     display: none;
 }
+
 
 /* =========================================
    REEL CARD
@@ -82,16 +102,21 @@
 
 .reel-card {
     position: relative;
+
     flex: 0 0 218px;
+
     aspect-ratio: 9 / 14;
 
     overflow: hidden;
+
     border-radius: 12px;
 
     background: #15130f;
+
     border: 1px solid rgba(201, 166, 83, 0.28);
 
     text-decoration: none;
+
     color: inherit;
 
     scroll-snap-align: start;
@@ -113,48 +138,78 @@
         0 0 35px rgba(201, 166, 83, 0.08);
 }
 
-.reel-image {
+
+/* =========================================
+   REEL VIDEO
+========================================= */
+
+.reel-video {
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
+
     height: 100%;
+
     display: block;
 
     object-fit: cover;
 
-    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    background: #11100d;
+
+    z-index: 0;
+
+    transition:
+        transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.reel-card:hover .reel-image {
+.reel-card:hover .reel-video {
     transform: scale(1.045);
 }
 
+
 /* =========================================
-   OVERLAY
+   VIDEO OVERLAY
 ========================================= */
 
 .reel-overlay {
     position: absolute;
+
     inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
 
     background:
         linear-gradient(to bottom,
-            rgba(0, 0, 0, 0.5),
-            transparent 30%,
-            transparent 55%,
+            rgba(0, 0, 0, 0.55),
+            transparent 28%,
+            transparent 58%,
             rgba(0, 0, 0, 0.72));
 }
 
+
 /* =========================================
-   TOP
+   TOP INFORMATION
 ========================================= */
 
 .reel-top {
     position: absolute;
+
     top: 15px;
+
     left: 15px;
+
     right: 15px;
 
+    z-index: 3;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     color: white;
@@ -162,12 +217,38 @@
 
 .reel-instagram {
     display: flex;
+
     align-items: center;
+
     gap: 7px;
 
     font-size: 10px;
+
     letter-spacing: 0.05em;
 }
+
+.instagram-icon {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 16px;
+
+    height: 16px;
+
+    flex-shrink: 0;
+
+    border: 1px solid currentColor;
+
+    border-radius: 4px;
+
+    font-size: 13px;
+
+    line-height: 1;
+}
+
 
 /* =========================================
    PLAY BUTTON
@@ -175,57 +256,84 @@
 
 .reel-play {
     position: absolute;
+
     top: 50%;
+
     left: 50%;
 
+    z-index: 3;
+
     width: 52px;
+
     height: 52px;
 
     transform: translate(-50%, -50%);
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border: 1px solid rgba(255, 255, 255, 0.45);
+
     border-radius: 50%;
 
     background: rgba(0, 0, 0, 0.25);
+
     backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
 
     color: white;
 
+    pointer-events: none;
+
     transition:
         transform 0.3s ease,
-        background 0.3s ease;
+        background 0.3s ease,
+        color 0.3s ease;
 }
 
 .reel-card:hover .reel-play {
     transform: translate(-50%, -50%) scale(1.1);
+
     background: rgba(201, 166, 83, 0.85);
+
     color: #111;
 }
 
+
 /* =========================================
-   BOTTOM
+   BOTTOM LABEL
 ========================================= */
 
 .reel-bottom {
     position: absolute;
+
     left: 16px;
+
     right: 16px;
+
     bottom: 15px;
 
+    z-index: 3;
+
     display: flex;
+
     justify-content: space-between;
 }
 
 .reel-bottom span {
     color: #e3c777;
+
     font-size: 9px;
+
     letter-spacing: 0.2em;
+
     font-weight: 600;
 }
+
 
 /* =========================================
    ORDER CARD
@@ -235,6 +343,7 @@
     position: relative;
 
     flex: 0 0 218px;
+
     aspect-ratio: 9 / 14;
 
     border-radius: 12px;
@@ -248,11 +357,15 @@
     border: 1px solid rgba(201, 166, 83, 0.55);
 
     color: #f4ead3;
+
     text-decoration: none;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
+
     align-items: center;
 
     text-align: center;
@@ -268,10 +381,13 @@
 
 .reel-order-card::before {
     content: "";
+
     position: absolute;
+
     inset: 14px;
 
     border: 1px solid rgba(201, 166, 83, 0.2);
+
     border-radius: 8px;
 
     pointer-events: none;
@@ -285,7 +401,9 @@
     position: relative;
 
     color: #c9a653;
+
     font-size: 9px;
+
     letter-spacing: 0.2em;
 }
 
@@ -295,14 +413,19 @@
     margin: 18px 0;
 
     font-family: Georgia, "Times New Roman", serif;
+
     font-size: 38px;
+
     font-weight: 400;
+
     line-height: 0.9;
+
     letter-spacing: -0.03em;
 }
 
 .reel-order-card h3 em {
     color: #c9a653;
+
     font-style: italic;
 }
 
@@ -310,17 +433,22 @@
     position: relative;
 
     width: 46px;
+
     height: 46px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border: 1px solid rgba(201, 166, 83, 0.55);
+
     border-radius: 50%;
 
     color: #c9a653;
 }
+
 
 /* =========================================
    FOOTER
@@ -328,8 +456,11 @@
 
 .reels-footer {
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     gap: 8px;
 
     margin-top: 30px;
@@ -337,19 +468,23 @@
     color: rgba(244, 234, 211, 0.48);
 
     font-size: 11px;
+
     letter-spacing: 0.05em;
 }
 
 .reels-footer strong {
     color: #c9a653;
+
     font-weight: 500;
 }
+
 
 /* =========================================
    MOBILE
 ========================================= */
 
 @media (max-width: 700px) {
+
     .reels-section {
         padding: 80px 0 90px;
     }
@@ -378,19 +513,308 @@
     .reels-track {
         gap: 12px;
     }
+
+    .reel-play {
+        width: 48px;
+
+        height: 48px;
+    }
+
+    .reel-top {
+        top: 13px;
+
+        left: 13px;
+
+        right: 13px;
+    }
+
+    .reel-bottom {
+        left: 13px;
+
+        right: 13px;
+
+        bottom: 13px;
+    }
 }
 
-.instagram-icon {
-    display: inline-flex;
+/* =========================================
+   REMOVE INSTAGRAM HEADER
+========================================= */
+
+.reel-card {
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+
+/* =========================================
+   FULLSCREEN REEL VIEWER
+========================================= */
+
+.reel-viewer {
+    position: fixed;
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 16px;
-    height: 16px;
+    background: #050504;
 
-    border: 1px solid currentColor;
-    border-radius: 4px;
+    overflow: hidden;
+}
 
-    font-size: 13px;
-    line-height: 1;
+
+/* =========================================
+   BLURRED BACKGROUND
+========================================= */
+
+.reel-viewer-backdrop {
+    position: absolute;
+    inset: -40px;
+
+    background-position: center;
+    background-size: cover;
+
+    filter: blur(35px);
+
+    opacity: 0.28;
+
+    transform: scale(1.12);
+}
+
+.reel-viewer-dark {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at center,
+            rgba(15, 13, 10, 0.35),
+            rgba(0, 0, 0, 0.88));
+}
+
+
+/* =========================================
+   MAIN VIDEO
+========================================= */
+
+.reel-viewer-video-wrap {
+    position: relative;
+
+    height: min(92vh, 900px);
+
+    aspect-ratio: 9 / 16;
+
+    max-width: 90vw;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(201, 166, 83, 0.45);
+
+    background: #080705;
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.75),
+        0 0 60px rgba(201, 166, 83, 0.06);
+
+    z-index: 2;
+}
+
+.reel-viewer-video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================
+   VIEWER CONTROLS
+========================================= */
+
+.viewer-controls {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    display: flex;
+
+    gap: 10px;
+
+    z-index: 5;
+}
+
+.viewer-controls button,
+.viewer-close,
+.viewer-arrow {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.viewer-controls button:hover,
+.viewer-close:hover,
+.viewer-arrow:hover {
+    background: rgba(201, 166, 83, 0.9);
+
+    border-color: #c9a653;
+
+    color: #111;
+
+    transform: scale(1.06);
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.viewer-close {
+    position: absolute;
+
+    top: 24px;
+    right: 28px;
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   PREVIOUS / NEXT
+========================================= */
+
+.viewer-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    z-index: 10;
+
+    transform: translateY(-50%);
+}
+
+.viewer-arrow:hover {
+    transform: translateY(-50%) scale(1.06);
+}
+
+.viewer-arrow-left {
+    left: 40px;
+}
+
+.viewer-arrow-right {
+    right: 40px;
+}
+
+
+/* =========================================
+   COUNTER
+========================================= */
+
+.viewer-counter {
+    position: absolute;
+
+    bottom: 18px;
+    left: 20px;
+
+    z-index: 5;
+
+    color: white;
+
+    font-size: 10px;
+
+    letter-spacing: 0.16em;
+
+    font-weight: 600;
+}
+
+.viewer-counter span {
+    margin: 0 5px;
+
+    color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* =========================================
+   MOBILE VIEWER
+========================================= */
+
+@media (max-width: 700px) {
+
+    .reel-viewer-video-wrap {
+        width: calc(100vw - 32px);
+
+        height: auto;
+
+        max-height: 88vh;
+
+        aspect-ratio: 9 / 16;
+
+        border-radius: 12px;
+    }
+
+    .viewer-close {
+        top: 14px;
+
+        right: 14px;
+
+        width: 40px;
+        height: 40px;
+    }
+
+    .viewer-controls {
+        top: 14px;
+
+        right: 64px;
+
+        gap: 7px;
+    }
+
+    .viewer-controls button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .viewer-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+    .viewer-arrow-left {
+        left: 10px;
+    }
+
+    .viewer-arrow-right {
+        right: 10px;
+    }
 }
