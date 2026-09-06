@@ -17,6 +17,7 @@ import FeaturedSection from './components/FeaturedSection'
 import CelebritySection from './components/CelebritySection'
 import RecipeSection from './components/RecipeSection'
 import MarketplaceSection from './components/MarketplaceSection'
+import HeritageSection from './components/HeritageSection'
 
 import { flavors } from './data/flavors'
 
@@ -131,6 +132,7 @@ export default function App() {
           <FeaturedSection />
           <CelebritySection />
           <MarketplaceSection />
+          <HeritageSection />
           <SpotlightSection />
           <RecipeSection />
           {/* <div id="flavors-section">

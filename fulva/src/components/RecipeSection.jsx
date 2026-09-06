@@ -213,8 +213,8 @@ export default function RecipeSection() {
                                 <motion.div
                                     key={recipe.id}
                                     className={`recipe-card ${isActive
-                                            ? "recipe-card-active"
-                                            : "recipe-card-side"
+                                        ? "recipe-card-active"
+                                        : "recipe-card-side"
                                         }`}
                                     onClick={() =>
                                         setActiveIndex(index)
@@ -289,11 +289,11 @@ export default function RecipeSection() {
                                                         {/* LIKE */}
                                                         <button
                                                             type="button"
-                                                            className={`recipe-icon-btn ${likedState[
-                                                                    recipe.id
-                                                                ]
-                                                                    ? "active"
-                                                                    : ""
+                                                            className={`recipe-icon-btn recipe-icon-like ${likedState[
+                                                                recipe.id
+                                                            ]
+                                                                ? "active"
+                                                                : ""
                                                                 }`}
                                                             onClick={(e) =>
                                                                 toggleLike(
@@ -345,10 +345,10 @@ export default function RecipeSection() {
                                                     <button
                                                         type="button"
                                                         className={`recipe-icon-btn recipe-icon-save ${savedState[
-                                                                recipe.id
-                                                            ]
-                                                                ? "active"
-                                                                : ""
+                                                            recipe.id
+                                                        ]
+                                                            ? "active"
+                                                            : ""
                                                             }`}
                                                         onClick={(e) =>
                                                             toggleSave(

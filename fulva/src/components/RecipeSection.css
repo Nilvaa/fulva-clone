@@ -1,30 +1,29 @@
 /* =========================================================
-   RECIPE / COOK WITH FULVA
-   Premium Instagram-inspired editorial section
+   FULVA — COOK WITH FULVA
+   PREMIUM EDITORIAL RECIPE CAROUSEL
 ========================================================= */
 
 .recipe-section {
     position: relative;
     width: 100%;
-    min-height: auto;
     overflow: hidden;
 
     background:
-        radial-gradient(ellipse at 50% 45%,
-            rgba(201, 166, 83, 0.11) 0%,
-            rgba(201, 166, 83, 0.035) 30%,
-            transparent 67%),
-        radial-gradient(ellipse at 12% 65%,
-            rgba(84, 40, 58, 0.15) 0%,
-            transparent 40%),
+        radial-gradient(ellipse at 50% 42%,
+            rgba(201, 166, 83, 0.10) 0%,
+            rgba(201, 166, 83, 0.035) 28%,
+            transparent 66%),
+        radial-gradient(ellipse at 15% 55%,
+            rgba(89, 43, 30, 0.14) 0%,
+            transparent 42%),
         linear-gradient(180deg,
             #090806 0%,
-            #0c0907 48%,
+            #0d0a08 55%,
             #080706 100%);
 
     color: #f4ead7;
 
-    padding: 36px 0 28px;
+    padding: 100px 0 34px;
 
     border-top: 1px solid rgba(201, 166, 83, 0.12);
     border-bottom: 1px solid rgba(201, 166, 83, 0.12);
@@ -38,42 +37,43 @@
 .recipe-glow {
     position: absolute;
 
-    width: 460px;
-    height: 260px;
+    width: 520px;
+    height: 300px;
 
     border-radius: 50%;
 
-    filter: blur(100px);
+    filter: blur(110px);
 
     pointer-events: none;
 
-    opacity: 0.18;
+    opacity: 0.13;
 }
 
 .recipe-glow-left {
-    left: -220px;
-    top: 40%;
+    left: -260px;
+    top: 42%;
 
-    background: #8b5d27;
+    background: #9b672f;
 }
 
 .recipe-glow-right {
-    right: -220px;
-    bottom: 15%;
+    right: -260px;
+    bottom: 10%;
 
-    background: #54283a;
+    background: #4d2930;
 }
 
 
 /* =========================================================
-   INNER CONTAINER
+   MAIN WIDTH
 ========================================================= */
 
 .recipe-inner {
     position: relative;
+
     z-index: 2;
 
-    width: min(1400px, calc(100% - 40px));
+    width: min(1450px, calc(100% - 48px));
 
     margin: 0 auto;
 }
@@ -86,10 +86,13 @@
 .recipe-header {
     text-align: center;
 
-    max-width: 720px;
+    max-width: 850px;
 
-    margin: 0 auto 12px;
+    margin: 0 auto 18px;
 }
+
+
+/* small gold eyebrow */
 
 .recipe-eyebrow {
     display: flex;
@@ -97,23 +100,28 @@
     align-items: center;
     justify-content: center;
 
-    gap: 16px;
+    gap: 17px;
 
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 
     color: #c9a653;
 
-    font-family: Inter, Arial, sans-serif;
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
 
-    font-size: 10px;
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 0.28em;
+    letter-spacing: 0.32em;
+
+    text-transform: uppercase;
 }
 
 .recipe-eyebrow span {
-    width: 40px;
+    width: 42px;
     height: 1px;
 
     background:
@@ -129,42 +137,56 @@
             transparent);
 }
 
+
+/* main editorial heading */
+
 .recipe-header h2 {
     margin: 0;
 
-    color: #f4ead7;
+    color: #f5eddf;
 
     font-family:
         "DM Serif Display",
         Georgia,
+        "Times New Roman",
         serif;
 
-    font-size: clamp(34px, 4vw, 52px);
+    font-size: clamp(42px, 5vw, 66px);
 
     font-weight: 400;
 
-    line-height: 1.02;
+    line-height: 0.98;
 
-    letter-spacing: -0.025em;
+    letter-spacing: -0.035em;
 }
 
 .recipe-header h2 em {
-    color: #d2ad56;
+    color: #d4b15c;
+
     font-style: italic;
 }
 
+
+/* supporting text */
+
 .recipe-header p {
-    margin: 6px auto 0;
+    margin: 12px auto 0;
 
-    max-width: 580px;
+    max-width: 650px;
 
-    color: rgba(244, 234, 215, 0.58);
+    color:
+        rgba(244, 234, 215, 0.58);
 
-    font-family: Inter, Arial, sans-serif;
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    line-height: 1.5;
+    line-height: 1.65;
+
+    letter-spacing: 0.01em;
 }
 
 
@@ -177,7 +199,7 @@
 
     width: 100%;
 
-    height: 500px;
+    height: 485px;
 
     display: flex;
 
@@ -210,11 +232,11 @@
     left: 50%;
     top: 50%;
 
-    width: 260px;
-    height: 500px;
+    width: 282px;
+    height: 455px;
 
-    margin-left: -130px;
-    margin-top: -250px;
+    margin-left: -141px;
+    margin-top: -227.5px;
 
     transform-origin: center center;
 
@@ -226,8 +248,6 @@
         transform,
         opacity,
         filter;
-
-    overflow: visible;
 }
 
 .recipe-card-active {
@@ -240,7 +260,7 @@
 
 
 /* =========================================================
-   COMPLETE INSTAGRAM-STYLE POST FRAME
+   VIDEO CARD
 ========================================================= */
 
 .recipe-video-shell {
@@ -249,30 +269,30 @@
     width: 100%;
     height: 100%;
 
-    display: flex;
-
-    flex-direction: column;
-
     overflow: hidden;
 
     border-radius: 18px;
 
-    background: #0d0b09;
+    background: #0b0907;
 
-    border: 1px solid rgba(201, 166, 83, 0.22);
+    border:
+        1px solid rgba(201, 166, 83, 0.62);
 
     box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.48);
+        0 24px 75px rgba(0, 0, 0, 0.60),
+        0 0 40px rgba(201, 166, 83, 0.07);
+
+    display: flex;
+
+    flex-direction: column;
 }
 
-.recipe-card-active .recipe-video-shell {
+.recipe-card-side .recipe-video-shell {
     border-color:
-        rgba(201, 166, 83, 0.75);
+        rgba(201, 166, 83, 0.18);
 
     box-shadow:
-        0 0 0 1px rgba(201, 166, 83, 0.15),
-        0 20px 70px rgba(0, 0, 0, 0.65),
-        0 0 45px rgba(201, 166, 83, 0.12);
+        0 18px 50px rgba(0, 0, 0, 0.40);
 }
 
 
@@ -281,32 +301,28 @@
 ========================================================= */
 
 .recipe-card-topbar {
-    flex-shrink: 0;
-
-    height: 42px;
-    min-height: 42px;
+    height: 43px;
+    min-height: 43px;
 
     display: flex;
 
     align-items: center;
 
-    padding: 0 12px;
+    padding: 0 13px;
 
-    background: #120f0c;
+    background: #100d0a;
 
     border-bottom:
-        1px solid rgba(201, 166, 83, 0.15);
+        1px solid rgba(201, 166, 83, 0.12);
 
     z-index: 5;
 }
 
 .recipe-avatar {
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
 
-    flex-shrink: 0;
-
-    margin-right: 8px;
+    margin-right: 9px;
 
     display: flex;
 
@@ -315,35 +331,45 @@
 
     border-radius: 50%;
 
+    background: #15110d;
+
     border:
-        1px solid rgba(201, 166, 83, 0.8);
+        1px solid rgba(201, 166, 83, 0.78);
 
     color: #d4b15c;
 
-    font-size: 10px;
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
 
     font-weight: 700;
-
-    background: #1a1510;
 }
 
 .recipe-topbar-user {
-    color: #f4ead7;
+    color: #f2e9d9;
 
-    font-family: Inter, Arial, sans-serif;
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
 
     font-size: 11px;
 
     font-weight: 600;
+
+    letter-spacing: -0.01em;
 }
 
 .recipe-more {
     margin-left: auto;
 
     color:
-        rgba(244, 234, 215, 0.65);
+        rgba(244, 234, 215, 0.55);
 
-    font-size: 13px;
+    font-size: 12px;
 
     letter-spacing: 2px;
 }
@@ -353,12 +379,15 @@
    VIDEO
 ========================================================= */
 
+/* Only the active card's video area flexes to fill remaining
+   space; side cards keep a fixed ratio so the collapsed
+   caption block on the active card doesn't need to be
+   accounted for on cards that don't show it. */
+
 .recipe-card-videowrap {
     position: relative;
 
     flex: 1;
-
-    min-height: 0;
 
     width: 100%;
 
@@ -373,28 +402,27 @@
 }
 
 .recipe-card-videowrap video {
+    display: block;
+
     width: 100%;
     height: 100%;
-
-    display: block;
 
     object-fit: cover;
 }
 
 
 /* =========================================================
-   EVERYTHING BELOW VIDEO
-   REMAINS INSIDE THE ACTIVE CARD
+   ACTIVE CARD — POST BLOCK (action bar + likes + caption)
 ========================================================= */
 
 .recipe-card-post {
+    display: flex;
+
+    flex-direction: column;
+
+    background: #100d0a;
+
     flex-shrink: 0;
-
-    background: #0d0b09;
-
-    padding: 0 12px 10px;
-
-    color: #f4ead7;
 }
 
 
@@ -409,13 +437,14 @@
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
-    background: #120f0c;
+    padding: 0 13px;
+
+    background: #100d0a;
 
     border-top:
-        1px solid rgba(201, 166, 83, 0.15);
+        1px solid rgba(201, 166, 83, 0.10);
 }
 
 .recipe-action-group-left {
@@ -423,694 +452,667 @@
 
     align-items: center;
 
-    gap: 14px;
+    gap: 13px;
 }
 
-.recipe-icon-btn {
-    width: 20px;
-    height: 20px;
 
-    padding: 0;
+/* =========================================================
+   ICON BUTTONS
+========================================================= */
+
+.recipe-icon-btn {
+    appearance: none;
+    -webkit-appearance: none;
+
+    border: none;
+    outline: none;
+
+    padding: 2px;
+
+    margin: 0;
+
+    background: transparent;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    background: transparent;
-
-    border: none;
-
-    outline: none;
-
     cursor: pointer;
 }
 
-.recipe-icon-btn:focus {
-    outline: none;
-
-    box-shadow: none;
-}
-
-.recipe-icon-btn:focus-visible {
-    outline:
-        1px solid rgba(201, 166, 83, 0.65);
-
-    outline-offset: 3px;
-
-    border-radius: 4px;
-}
-
 .recipe-icon-btn img {
-    width: 19px;
-    height: 19px;
+    width: 18px;
+    height: 18px;
 
     object-fit: contain;
 
     filter:
         brightness(0) invert(1);
 
-    opacity: 0.9;
+    opacity: 0.78;
 
     transition:
-        filter 0.2s ease,
         transform 0.2s ease,
-        opacity 0.2s ease;
+        opacity 0.2s ease,
+        filter 0.2s ease;
 }
 
 .recipe-icon-btn:hover img {
     opacity: 1;
 
-    transform: scale(1.08);
+    transform: scale(1.1);
 }
-
-
-/* =========================================================
-   LIKE ACTIVE = RED
-========================================================= */
 
 .recipe-icon-btn.active img {
     filter:
-        brightness(0) saturate(100%) invert(18%) sepia(96%) saturate(5128%) hue-rotate(350deg) brightness(97%) contrast(108%);
+        invert(72%) sepia(48%) saturate(600%) hue-rotate(5deg) brightness(95%);
 
     opacity: 1;
 }
 
-
-/* =========================================================
-   SAVE ACTIVE = ANTIQUE GOLD
-========================================================= */
-
-.recipe-icon-save.active img {
+/* Like button reads red when active, regardless of the
+   gold accent used elsewhere — matches standard like-icon
+   convention and avoids the greenish cast some icon assets
+   get from the gold filter above. */
+.recipe-icon-btn.recipe-icon-like.active img {
     filter:
-        brightness(0) saturate(100%) invert(70%) sepia(45%) saturate(750%) hue-rotate(5deg) brightness(94%) contrast(92%);
+        brightness(0) saturate(100%) invert(24%) sepia(89%) saturate(3550%) hue-rotate(342deg) brightness(97%) contrast(97%);
 
     opacity: 1;
 }
 
+/* save icon sits on the far right of the action bar */
+.recipe-icon-save {
+    margin-left: auto;
+}
+
 
 /* =========================================================
-   LIKE COUNT
+   LIKES / CAPTION / COMMENTS / TIME
 ========================================================= */
 
 .recipe-like-count {
-    margin-top: 1px;
+    margin: 10px 14px 4px;
 
     color: #f4ead7;
 
-    font-family: Inter, Arial, sans-serif;
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
 
-    font-size: 10px;
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.recipe-card-caption {
+    margin: 0 14px 8px;
+
+    color:
+        rgba(244, 234, 215, 0.70);
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 10.5px;
+
+    line-height: 1.55;
+}
+
+.recipe-card-caption span {
+    margin-right: 5px;
+
+    color: #f4ead7;
+
+    font-weight: 700;
+}
+
+.recipe-card-time {
+    margin: 0 14px 12px;
+
+    color:
+        rgba(244, 234, 215, 0.38);
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    font-size: 8.5px;
 
     font-weight: 600;
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
 }
 
 
 /* =========================================================
-   CREATOR CAPTION
+   SIDE PLAY
 ========================================================= */
 
-.recipe-card-caption {
-    margin-top: 5px;
+.recipe-side-play {
+    position: absolute;
 
-    color:
-        rgba(244, 234, 215, 0.82);
+    left: 50%;
+    top: 50%;
 
-    font-family: Inter, Arial, sans-serif;
+    width: 42px;
+    height: 42px;
 
-    font-size: 10px;
+    transform:
+        translate(-50%, -50%);
 
-    line-height: 1.45;
+    display: flex;
 
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
 
-    .recipe-card-caption span {
-        color: #f4ead7;
+    border-radius: 50%;
 
-        font-weight: 700;
-    }
+    background:
+        rgba(8, 7, 6, 0.72);
 
+    border:
+        1px solid rgba(244, 234, 215, 0.28);
 
-    /* =========================================================
-   COMMENTS
-========================================================= */
+    color: #d4b15c;
 
-    .recipe-comments {
-        display: block;
+    font-size: 12px;
 
-        margin-top: 5px;
+    backdrop-filter: blur(8px);
 
-        padding: 0;
-
-        border: none;
-
-        background: transparent;
-
-        color:
-            rgba(244, 234, 215, 0.42);
-
-        font-family: Inter, Arial, sans-serif;
-
-        font-size: 9px;
-
-        cursor: pointer;
-
-        text-align: left;
-    }
-
-    .recipe-comments:hover {
-        color:
-            rgba(244, 234, 215, 0.68);
-    }
+    z-index: 5;
+}
 
 
-    /* =========================================================
-   POST TIME
-========================================================= */
-
-    .recipe-card-time {
-        margin-top: 4px;
-
-        color:
-            rgba(244, 234, 215, 0.3);
-
-        font-family: Inter, Arial, sans-serif;
-
-        font-size: 8px;
-
-        text-transform: uppercase;
-
-        letter-spacing: 0.08em;
-    }
-
-
-    /* =========================================================
-   SIDE REEL PLAY BUTTON
-========================================================= */
-
-    .recipe-side-play {
-        position: absolute;
-
-        left: 50%;
-        top: 50%;
-
-        transform:
-            translate(-50%, -50%);
-
-        width: 42px;
-        height: 42px;
-
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 50%;
-
-        background:
-            rgba(8, 7, 6, 0.75);
-
-        border:
-            1px solid rgba(244, 234, 215, 0.25);
-
-        color: #d4b15c;
-
-        font-size: 12px;
-
-        backdrop-filter: blur(8px);
-
-        z-index: 4;
-    }
-
-
-    /* =========================================================
+/* =========================================================
    GOLD ACTIVE BORDER
 ========================================================= */
 
-    .recipe-card-border {
-        position: absolute;
+.recipe-card-border {
+    position: absolute;
 
-        inset: 0;
+    inset: 0;
 
-        z-index: 20;
+    z-index: 10;
 
-        border-radius: 18px;
+    border-radius: 18px;
 
-        border:
-            1px solid rgba(201, 166, 83, 0.7);
+    border:
+        1px solid rgba(212, 177, 92, 0.72);
 
-        box-shadow:
-            inset 0 0 0 1px rgba(255, 236, 178, 0.1),
-            0 0 24px rgba(201, 166, 83, 0.12);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 239, 190, 0.07),
+        0 0 30px rgba(201, 166, 83, 0.08);
 
-        pointer-events: none;
-    }
+    pointer-events: none;
+}
 
 
-    /* =========================================================
-   NAVIGATION ARROWS
+/* =========================================================
+   SIDE ARROWS
 ========================================================= */
 
-    .recipe-arrow {
-        position: absolute;
+.recipe-arrow {
+    position: absolute;
 
-        top: 50%;
+    top: 50%;
 
-        transform:
-            translateY(-50%);
+    width: 48px;
+    height: 48px;
 
-        z-index: 30;
+    transform:
+        translateY(-50%);
 
-        width: 48px;
-        height: 48px;
+    z-index: 30;
 
-        display: flex;
+    display: flex;
 
-        align-items: center;
-        justify-content: center;
+    align-items: center;
+    justify-content: center;
 
-        border-radius: 50%;
+    padding: 0;
 
-        background:
-            rgba(8, 7, 6, 0.82);
+    appearance: none;
+    -webkit-appearance: none;
 
-        border:
-            1px solid rgba(201, 166, 83, 0.55);
+    border-radius: 50%;
 
-        color: #d4b15c;
+    background:
+        rgba(9, 8, 6, 0.88);
 
-        font-family: Georgia, serif;
+    border:
+        1px solid rgba(201, 166, 83, 0.52);
 
-        font-size: 22px;
+    color: #d4b15c;
 
-        cursor: pointer;
+    font-family:
+        Georgia,
+        serif;
 
-        backdrop-filter: blur(8px);
+    font-size: 20px;
 
-        transition:
-            background 0.3s ease,
-            color 0.3s ease,
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-    }
+    font-weight: 400;
 
-    .recipe-arrow:hover {
-        background:
-            rgba(201, 166, 83, 0.15);
+    line-height: 1;
 
-        border-color:
-            rgba(227, 199, 119, 0.9);
+    cursor: pointer;
 
-        color: #f4ead7;
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 238, 181, 0.07);
 
-        box-shadow:
-            0 0 20px rgba(201, 166, 83, 0.2);
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
+}
 
-        transform:
-            translateY(-50%) scale(1.06);
-    }
+.recipe-arrow:hover {
+    transform:
+        translateY(-50%) scale(1.05);
 
-    .recipe-arrow-left {
-        left: 20px;
-    }
+    background:
+        rgba(201, 166, 83, 0.13);
 
-    .recipe-arrow-right {
-        right: 20px;
-    }
+    border-color:
+        rgba(225, 196, 118, 0.85);
+
+    color: #f5eddf;
+}
+
+.recipe-arrow-left {
+    left: 20px;
+}
+
+.recipe-arrow-right {
+    right: 20px;
+}
 
 
-    /* =========================================================
-   COUNTER OUTSIDE ACTIVE CARD
+/* =========================================================
+   BOTTOM COUNTER ROW
+   (matches the "03 / 04 — HALWA RECIPE  [VIEW ON INSTAGRAM]"
+   row rendered by <div className="recipe-counter-outside">)
 ========================================================= */
 
-    .recipe-counter-outside {
-        display: flex;
+.recipe-counter-outside {
+    position: relative;
 
-        align-items: center;
-        justify-content: center;
+    z-index: 20;
 
-        gap: 8px;
+    width: min(760px, calc(100% - 40px));
 
-        margin-top: 12px;
+    margin: 26px auto 0;
 
-        color:
-            rgba(244, 234, 215, 0.4);
+    display: flex;
 
-        font-family: Inter, Arial, sans-serif;
+    align-items: center;
 
-        font-size: 9px;
+    gap: 9px;
 
-        letter-spacing: 0.18em;
-    }
+    padding: 14px 0 0;
 
-    .recipe-counter-outside strong {
-        color: #d4b15c;
+    border-top:
+        1px solid rgba(201, 166, 83, 0.16);
 
-        font-size: 11px;
-    }
+    color:
+        rgba(244, 234, 215, 0.46);
 
-    .recipe-counter-outside i {
-        width: 32px;
-        height: 1px;
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
 
-        margin: 0 4px;
+    font-size: 9px;
 
-        background:
-            rgba(201, 166, 83, 0.4);
-    }
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    white-space: nowrap;
+}
+
+.recipe-counter-outside strong {
+    color: #d4b15c;
+
+    font-size: 11px;
+}
+
+.recipe-counter-outside i {
+    display: block;
+
+    width: 30px;
+    height: 1px;
+
+    background:
+        rgba(201, 166, 83, 0.45);
+}
 
 
-    /* =========================================================
+/* =========================================================
    VIEW ON INSTAGRAM
 ========================================================= */
 
-    .recipe-instagram-button {
-        display: inline-flex;
+.recipe-instagram-button {
+    display: inline-flex;
 
-        align-items: center;
+    align-items: center;
+    justify-content: center;
 
-        gap: 6px;
+    gap: 8px;
 
-        margin-left: 28px;
+    padding: 9px 17px;
 
-        padding: 8px 16px;
+    min-height: 35px;
 
-        border-radius: 20px;
+    margin: 0 0 0 auto;
 
-        background:
-            rgba(201, 166, 83, 0.12);
+    appearance: none;
+    -webkit-appearance: none;
 
-        border:
-            1px solid rgba(201, 166, 83, 0.35);
+    border-radius: 999px;
 
-        color: #f4ead7;
+    background:
+        rgba(201, 166, 83, 0.055);
 
-        font-family: Inter, Arial, sans-serif;
+    border:
+        1px solid rgba(201, 166, 83, 0.48);
 
-        font-size: 9px;
+    color: #f1e7d6;
 
-        font-weight: 700;
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
 
-        letter-spacing: 0.15em;
+    font-size: 8px;
 
-        cursor: pointer;
+    font-weight: 700;
 
-        transition:
-            background 0.3s ease,
-            border-color 0.3s ease,
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-    }
+    letter-spacing: 0.17em;
 
-    .recipe-instagram-button:hover {
-        background:
-            rgba(201, 166, 83, 0.22);
+    text-transform: uppercase;
 
-        border-color:
-            rgba(201, 166, 83, 0.6);
+    text-decoration: none;
 
-        transform:
-            translateY(-1px);
+    line-height: 1;
 
-        box-shadow:
-            0 0 16px rgba(201, 166, 83, 0.15);
-    }
+    cursor: pointer;
 
-    .recipe-instagram-button span {
-        font-size: 12px;
-    }
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.recipe-instagram-button:hover {
+    background:
+        #d4b15c;
+
+    border-color:
+        #e2c477;
+
+    color:
+        #100d09;
+
+    transform:
+        translateY(-2px);
+}
+
+.recipe-instagram-button span {
+    font-size: 12px;
+}
 
 
-    /* =========================================================
-   BOTTOM ORNAMENT
+/* =========================================================
+   COMMENTS LINK
 ========================================================= */
 
-    .recipe-ornament {
-        display: flex;
+.recipe-comments {
+    display: block;
 
-        align-items: center;
-        justify-content: center;
+    align-self: flex-start;
 
-        gap: 15px;
+    margin: 0 14px 6px;
 
-        margin-top: 24px;
+    padding: 0;
 
-        color:
-            rgba(201, 166, 83, 0.65);
+    appearance: none;
+    -webkit-appearance: none;
 
-        font-size: 10px;
-    }
+    background: transparent;
 
-    .recipe-ornament span {
-        width: 38px;
-        height: 1px;
+    border: none;
 
-        background:
-            linear-gradient(90deg,
-                transparent,
-                rgba(201, 166, 83, 0.4));
-    }
+    color:
+        rgba(244, 234, 215, 0.42);
 
-    .recipe-ornament span:last-child {
-        background:
-            linear-gradient(90deg,
-                rgba(201, 166, 83, 0.4),
-                transparent);
-    }
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
 
-    .recipe-ornament i {
-        display: inline-block;
+    font-size: 9.5px;
 
-        width: 5px;
-        height: 5px;
+    font-weight: 500;
 
-        transform: rotate(45deg);
+    line-height: 1.3;
 
-        border:
-            1px solid rgba(201, 166, 83, 0.7);
-    }
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.recipe-comments:hover {
+    color:
+        rgba(244, 234, 215, 0.78);
+}
 
 
-    /* =========================================================
+/* =========================================================
+   ORNAMENT
+========================================================= */
+
+.recipe-ornament {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    margin-top: 23px;
+
+    color:
+        rgba(201, 166, 83, 0.65);
+
+    font-size: 9px;
+}
+
+.recipe-ornament span {
+    width: 38px;
+    height: 1px;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            rgba(201, 166, 83, 0.38));
+}
+
+.recipe-ornament span:last-child {
+    background:
+        linear-gradient(90deg,
+            rgba(201, 166, 83, 0.38),
+            transparent);
+}
+
+.recipe-ornament i {
+    width: 5px;
+    height: 5px;
+
+    display: block;
+
+    transform: rotate(45deg);
+
+    border:
+        1px solid rgba(201, 166, 83, 0.65);
+}
+
+
+/* =========================================================
    TABLET
 ========================================================= */
 
-    @media (max-width: 900px) {
+@media (max-width: 900px) {
 
-        .recipe-section {
-            padding: 32px 0 24px;
-        }
-
-        .recipe-inner {
-            width: calc(100% - 32px);
-        }
-
-        .recipe-stage {
-            height: 470px;
-        }
-
-        .recipe-card {
-            width: 240px;
-            height: 470px;
-
-            margin-left: -120px;
-            margin-top: -235px;
-        }
-
-        .recipe-arrow-left {
-            left: 8px;
-        }
-
-        .recipe-arrow-right {
-            right: 8px;
-        }
+    .recipe-section {
+        padding-top: 88px;
     }
 
+    .recipe-inner {
+        width: calc(100% - 32px);
+    }
 
-    /* =========================================================
+    .recipe-stage {
+        height: 440px;
+    }
+
+    .recipe-card {
+        width: 255px;
+        height: 415px;
+
+        margin-left: -127.5px;
+        margin-top: -207.5px;
+    }
+
+    .recipe-arrow-left {
+        left: 5px;
+    }
+
+    .recipe-arrow-right {
+        right: 5px;
+    }
+
+    .recipe-counter-outside {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
-    @media (max-width: 600px) {
+@media (max-width: 600px) {
 
-        .recipe-section {
-            padding: 24px 0 18px;
-        }
-
-        .recipe-inner {
-            width: calc(100% - 24px);
-        }
-
-        .recipe-header {
-            margin-bottom: 10px;
-        }
-
-        .recipe-header h2 {
-            font-size: 32px;
-        }
-
-        .recipe-header p {
-            font-size: 12px;
-        }
-
-        .recipe-stage {
-            height: 430px;
-        }
-
-        .recipe-card {
-            width: 220px;
-            height: 430px;
-
-            margin-left: -110px;
-            margin-top: -215px;
-        }
-
-        .recipe-card-topbar {
-            height: 38px;
-            min-height: 38px;
-        }
-
-        .recipe-avatar {
-            width: 22px;
-            height: 22px;
-        }
-
-        .recipe-topbar-user {
-            font-size: 10px;
-        }
-
-        .recipe-card-actionbar {
-            height: 38px;
-            min-height: 38px;
-        }
-
-        .recipe-icon-btn {
-            width: 19px;
-            height: 19px;
-        }
-
-        .recipe-icon-btn img {
-            width: 18px;
-            height: 18px;
-        }
-
-        .recipe-card-caption {
-            font-size: 9px;
-        }
-
-        .recipe-like-count {
-            font-size: 9px;
-        }
-
-        .recipe-comments {
-            font-size: 8px;
-        }
-
-        .recipe-card-time {
-            font-size: 7px;
-        }
-
-        .recipe-arrow {
-            width: 38px;
-            height: 38px;
-
-            font-size: 16px;
-        }
-
-        .recipe-arrow-left {
-            left: 2px;
-        }
-
-        .recipe-arrow-right {
-            right: 2px;
-        }
-
-        .recipe-counter-outside {
-            flex-wrap: wrap;
-        }
-
-        .recipe-instagram-button {
-            margin-left: 12px;
-
-            padding: 7px 12px;
-        }
+    .recipe-section {
+        padding-top: 78px;
     }
 
+    .recipe-inner {
+        width: calc(100% - 24px);
+    }
 
-    /* =========================================================
+    .recipe-header h2 {
+        font-size: 38px;
+    }
+
+    .recipe-header p {
+        font-size: 11px;
+    }
+
+    .recipe-stage {
+        height: 390px;
+    }
+
+    .recipe-card {
+        width: 225px;
+        height: 365px;
+
+        margin-left: -112.5px;
+        margin-top: -182.5px;
+    }
+
+    .recipe-arrow {
+        width: 40px;
+        height: 40px;
+
+        font-size: 17px;
+    }
+
+    .recipe-arrow-left {
+        left: 0;
+    }
+
+    .recipe-arrow-right {
+        right: 0;
+    }
+
+    .recipe-counter-outside {
+        flex-wrap: wrap;
+
+        row-gap: 13px;
+
+        padding-top: 14px;
+    }
+
+    .recipe-instagram-button {
+        margin-left: 0;
+
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
    SMALL MOBILE
 ========================================================= */
 
-    @media (max-width: 430px) {
+@media (max-width: 430px) {
 
-        .recipe-header h2 {
-            font-size: 28px;
-        }
-
-        .recipe-stage {
-            height: 400px;
-        }
-
-        .recipe-card {
-            width: 205px;
-            height: 400px;
-
-            margin-left: -102.5px;
-            margin-top: -200px;
-        }
-
-        .recipe-card-post {
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-bottom: 8px;
-        }
-
-        .recipe-action-group-left {
-            gap: 11px;
-        }
-
-        .recipe-icon-btn img {
-            width: 17px;
-            height: 17px;
-        }
-
-        .recipe-card-caption {
-            font-size: 8.5px;
-        }
-
-        .recipe-arrow {
-            width: 34px;
-            height: 34px;
-
-            font-size: 14px;
-        }
-
-        .recipe-instagram-button {
-            width: 100%;
-
-            justify-content: center;
-
-            margin-left: 0;
-
-            margin-top: 8px;
-        }
+    .recipe-header h2 {
+        font-size: 33px;
     }
 
+    .recipe-stage {
+        height: 350px;
+    }
 
-    /* =========================================================
+    .recipe-card {
+        width: 205px;
+        height: 335px;
+
+        margin-left: -102.5px;
+        margin-top: -167.5px;
+    }
+
+    .recipe-arrow {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+
+/* =========================================================
    REDUCED MOTION
 ========================================================= */
 
-    @media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
 
-        .recipe-card,
-        .recipe-arrow,
-        .recipe-instagram-button,
-        .recipe-icon-btn {
-            transition: none !important;
-        }
+    .recipe-card,
+    .recipe-arrow,
+    .recipe-instagram-button,
+    .recipe-icon-btn,
+    .recipe-comments {
+        transition: none !important;
     }
 }
