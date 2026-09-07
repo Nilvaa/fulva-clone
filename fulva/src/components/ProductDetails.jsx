@@ -1,402 +1,242 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import {
+    ArrowLeft,
+    ArrowRight,
+    ChevronDown,
+    ShoppingBag,
+    Share2,
+    Truck,
+    ShieldCheck,
+    Leaf,
+    Users,
+    Plus,
+    Minus,
+    X,
+} from "lucide-react";
 import "./ProductDetails.css";
 
 /* =========================================================
-   TEMPORARY GALLERY FALLBACKS
-
-   ShopPage:
-   All ShopPage products temporarily use the Strawberry
-   product gallery.
-
-   PopularProducts:
-   All PopularProducts products can temporarily use the
-   24 Premium image.
-
-   The actual product content still comes from the clicked
-   product object.
+   SHARED PRODUCT DETAIL IMAGES
    ========================================================= */
 
-const STRAWBERRY_GALLERY = [
-    "/products/fulva-strawberry-halwa.png",
-    "/products/fulva-strawberry-image-2.webp",
-    "/products/fulva-strawberry-image-3.webp",
-    "/products/fulva-strawberry-image-4.webp",
-];
-
-const PREMIUM_24_GALLERY = [
-    "/products/24-premium.webp",
+const SHARED_DETAIL_IMAGES = [
+    "/products/pdt-1.webp",
+    "/products/pdt1-image-2.webp",
+    "/products/pdt1-image-3.webp",
+    "/products/pdt1-image-4.webp",
 ];
 
 /* =========================================================
-   ICONS
+   PRODUCT STORY IMAGES
+
+   Same images for every product for now.
+   We can make these product-specific later.
    ========================================================= */
 
-function ArrowLeft() {
-    return (
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-            <path
-                d="M19 12H5M11 18l-6-6 6-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    );
-}
-
-function ArrowRight() {
-    return (
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-            <path
-                d="M5 12h14M13 6l6 6-6 6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    );
-}
-
-function ShareIcon() {
-    return (
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-            <circle
-                cx="18"
-                cy="5"
-                r="2.2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-
-            <circle
-                cx="6"
-                cy="12"
-                r="2.2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-
-            <circle
-                cx="18"
-                cy="19"
-                r="2.2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-
-            <path
-                d="M8 11l8-5M8 13l8 5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-        </svg>
-    );
-}
-
-function CartIcon() {
-    return (
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-        >
-            <path
-                d="M3 5h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L20 9H6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-
-            <circle
-                cx="10"
-                cy="20"
-                r="1.3"
-                fill="currentColor"
-            />
-
-            <circle
-                cx="17"
-                cy="20"
-                r="1.3"
-                fill="currentColor"
-            />
-        </svg>
-    );
-}
-
-function TruckIcon() {
-    return (
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                d="M3 6h11v10H3zM14 10h4l3 3v3h-7z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-            />
-
-            <circle
-                cx="7"
-                cy="18"
-                r="1.7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-
-            <circle
-                cx="18"
-                cy="18"
-                r="1.7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-        </svg>
-    );
-}
-
-function ShieldIcon() {
-    return (
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                d="M12 3l7 3v5c0 4.7-2.8 8.1-7 10-4.2-1.9-7-5.3-7-10V6l7-3z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-
-            <path
-                d="M9 12l2 2 4-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    );
-}
-
-function LeafIcon() {
-    return (
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                d="M19 4C10 4 5 8 5 14c0 3 2 5 5 5 6 0 9-6 9-15z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-
-            <path
-                d="M5 19c2-4 5-6 9-8"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-            />
-        </svg>
-    );
-}
-
-function PeopleIcon() {
-    return (
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle
-                cx="9"
-                cy="8"
-                r="3"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-
-            <circle
-                cx="17"
-                cy="9"
-                r="2.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-            />
-
-            <path
-                d="M3.5 19c.7-3.2 2.5-5 5.5-5s4.8 1.8 5.5 5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-            />
-
-            <path
-                d="M15 14c2.8 0 4.7 1.6 5.3 4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-            />
-        </svg>
-    );
-}
+const STORY_IMAGES = [
+    "/products/Strawberry_halwa-scroll-img-1.webp",
+    "/products/Strawberry_halwa-scroll-img-2.webp",
+    "/products/Strawberry_halwa-scroll-img-3.webp",
+    "/products/Strawberry_halwa-scroll-img-4.webp",
+];
 
 /* =========================================================
-   PRODUCT DETAILS COMPONENT
+   DEFAULT FAQ CONTENT
+   ========================================================= */
+
+const DEFAULT_FAQS = [
+    {
+        title: "FULVA PROMISE",
+        content: [
+            "No Maida",
+            "No Palm Oil",
+            "No added preservatives",
+            "Vegetarian",
+        ],
+    },
+    {
+        title: "WHAT MAKES THIS HALWA SPECIAL",
+        content: [
+            "Soft, smooth & chewy texture",
+            "Authentic Kozhikoden halwa experience",
+            "Made with carefully selected ingredients",
+            "Rich, indulgent flavour",
+            "Consistent taste in every batch",
+            "Perfect for gifting & celebrations",
+        ],
+    },
+    {
+        title: "INGREDIENTS",
+        content: [
+            "Cornflour, Water, Sugar, Sunflower Oil and selected flavour ingredients.",
+            "Contains permitted food flavouring and colouring substances where applicable.",
+            "This food item contains corn flour & nuts.",
+        ],
+    },
+    {
+        title: "SHIPPING",
+        content: [
+            "We ship to every corner of India.",
+            "Orders are processed and dispatched within 1–2 working days.",
+            "Orders typically reach you in 2–5 working days after dispatch depending on your location.",
+            "Free delivery on orders above ₹499.",
+            "For orders below ₹499, standard shipping charges may apply at checkout.",
+            "International delivery is available. Timelines and charges depend on the destination.",
+            "Once your order is shipped, you will receive a tracking link by email or WhatsApp.",
+            "All products are freshly made and carefully packed.",
+        ],
+    },
+];
+
+/* =========================================================
+   PRODUCT DETAILS
    ========================================================= */
 
 export default function ProductDetails({
     product,
     onBack,
 }) {
-    /* =====================================================
-       PRODUCT SAFETY / DEFAULTS
-       ===================================================== */
-
-    const safeProduct = product || null;
-
-    /*
-     * Determine which temporary gallery to use.
-
-     * ShopPage products:
-       → Strawberry gallery
-
-     * PopularProducts products:
-       → 24 Premium image
-
-     * If the clicked product already provides a gallery,
-       that gallery takes priority.
-     */
-
-    const galleryImages =
-        safeProduct?.images?.length
-            ? safeProduct.images
-            : safeProduct?.source === "shop"
-                ? STRAWBERRY_GALLERY
-                : safeProduct?.source === "popular"
-                    ? PREMIUM_24_GALLERY
-                    : safeProduct?.image
-                        ? [safeProduct.image]
-                        : [];
-
-    const offers = Array.isArray(safeProduct?.offers)
-        ? safeProduct.offers
-        : [];
-
-    /* =====================================================
+    /* =======================================================
        STATE
-       ===================================================== */
+       ======================================================= */
 
     const [activeImage, setActiveImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
+    const [openFaq, setOpenFaq] = useState(null);
+    const [toastVisible, setToastVisible] = useState(true);
 
-    /* =====================================================
-       RESET WHEN PRODUCT CHANGES
-       ===================================================== */
+    /* =======================================================
+       PRODUCT FALLBACK
+       ======================================================= */
 
-    useEffect(() => {
-        setActiveImage(0);
-        setQuantity(1);
-    }, [safeProduct?.id]);
-
-    /* =====================================================
-       PRODUCT NOT FOUND
-       ===================================================== */
-
-    if (!safeProduct) {
+    if (!product) {
         return (
-            <section className="product-details-page">
+            <main className="product-details-page">
                 <div className="product-details-error">
-                    <p className="product-category">
-                        <span>✦</span>
-                        <span>FULVA COLLECTION</span>
-                    </p>
-
-                    <h1>Product not found</h1>
+                    <p>Product not found.</p>
 
                     <button
                         type="button"
                         onClick={onBack}
                     >
-                        ← Back to Collection
+                        <ArrowLeft size={17} />
+                        Back to Collection
                     </button>
                 </div>
-            </section>
+            </main>
         );
     }
 
-    /* =====================================================
+    /* =======================================================
        PRODUCT VALUES
-       ===================================================== */
+       ======================================================= */
 
     const productName =
-        safeProduct.name ||
-        safeProduct.title ||
+        product.name ||
+        product.title ||
         "Fulva Halwa";
 
     const productCategory =
-        safeProduct.category ||
+        product.category ||
         "PREMIUM COLLECTION";
 
     const productType =
-        safeProduct.type ||
+        product.type ||
         "Kozhikoden Halwa";
 
     const productPrice =
-        safeProduct.price ||
+        product.price ||
         "₹399";
 
     const productOldPrice =
-        safeProduct.oldPrice ||
+        product.oldPrice ||
+        product.originalPrice ||
         "";
 
     const productDiscount =
-        safeProduct.discount ||
+        product.discount ||
         "";
-
-    const productPricePerGram =
-        safeProduct.pricePerGram ||
-        "";
-
-    const productShelfLife =
-        safeProduct.shelfLife ||
-        "Premium freshness";
 
     const productWeight =
-        safeProduct.weight ||
+        product.weight ||
+        "200g";
+
+    const productShelfLife =
+        product.shelfLife ||
+        "30 days shelf life";
+
+    const productPricePerGram =
+        product.pricePerGram ||
         "";
 
     const productDelivery =
-        safeProduct.delivery ||
+        product.delivery ||
         "All India Delivery Within 2 – 5 Business days";
 
     const productDescription =
-        safeProduct.description ||
+        product.description ||
         "Authentic Kozhikoden Halwa, handcrafted with traditional recipes and premium ingredients.";
 
-    /* =====================================================
-       CAROUSEL CONTROLS
-       ===================================================== */
+    /* =======================================================
+       PRODUCT IMAGES
+  
+       IMPORTANT:
+       If product.images exists, use it.
+  
+       Otherwise:
+         product cover image
+         +
+         shared pdt images
+       ======================================================= */
+
+    const galleryImages = useMemo(() => {
+        if (
+            Array.isArray(product.images) &&
+            product.images.length > 0
+        ) {
+            return product.images;
+        }
+
+        if (product.image) {
+            return [
+                product.image,
+                ...SHARED_DETAIL_IMAGES,
+            ];
+        }
+
+        return SHARED_DETAIL_IMAGES;
+    }, [product]);
+
+    /* =======================================================
+       OFFERS
+       ======================================================= */
+
+    const offers =
+        Array.isArray(product.offers)
+            ? product.offers
+            : [];
+
+    /* =======================================================
+       RESET WHEN PRODUCT CHANGES
+       ======================================================= */
+
+    useEffect(() => {
+        setActiveImage(0);
+        setQuantity(1);
+        setToastVisible(true);
+        setOpenFaq(null);
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }, [product.id]);
+
+    /* =======================================================
+       CAROUSEL
+       ======================================================= */
 
     const goPrevious = () => {
-        if (galleryImages.length <= 1) return;
-
         setActiveImage((current) =>
             current === 0
                 ? galleryImages.length - 1
@@ -405,8 +245,6 @@ export default function ProductDetails({
     };
 
     const goNext = () => {
-        if (galleryImages.length <= 1) return;
-
         setActiveImage((current) =>
             current === galleryImages.length - 1
                 ? 0
@@ -414,55 +252,48 @@ export default function ProductDetails({
         );
     };
 
-    /* =====================================================
+    /* =======================================================
        SHARE
-       ===================================================== */
+       ======================================================= */
 
     const handleShare = async () => {
-        const shareData = {
-            title: productName,
-            text: `Discover ${productName} at Fulva.`,
-            url: window.location.href,
-        };
-
         try {
             if (navigator.share) {
-                await navigator.share(shareData);
+                await navigator.share({
+                    title: productName,
+                    text: `Discover ${productName} at Fulva.`,
+                    url: window.location.href,
+                });
             } else if (navigator.clipboard) {
                 await navigator.clipboard.writeText(
                     window.location.href
                 );
             }
         } catch {
-            // User cancelled sharing.
+            // User cancelled share.
         }
     };
 
-    /* =====================================================
+    /* =======================================================
        ADD TO CART
-       ===================================================== */
+       ======================================================= */
 
     const handleAddToCart = () => {
-        /*
-         * Cart functionality can be connected later.
-         * For now this safely keeps the button functional.
-         */
         console.log(
             "Added to cart:",
             productName,
             "Quantity:",
             quantity
         );
+
+        setToastVisible(true);
     };
 
-    /* =====================================================
+    /* =======================================================
        BUY NOW
-       ===================================================== */
+       ======================================================= */
 
     const handleBuyNow = () => {
-        /*
-         * Checkout functionality can be connected later.
-         */
         console.log(
             "Buy now:",
             productName,
@@ -471,134 +302,119 @@ export default function ProductDetails({
         );
     };
 
-    /* =====================================================
+    /* =======================================================
+       FAQ
+       ======================================================= */
+
+    const toggleFaq = (index) => {
+        setOpenFaq((current) =>
+            current === index
+                ? null
+                : index
+        );
+    };
+
+    /* =======================================================
        RENDER
-       ===================================================== */
+       ======================================================= */
 
     return (
         <main className="product-details-page">
 
-            {/* =================================================
-                BACKGROUND ATMOSPHERE
-                ================================================= */}
+            {/* =====================================================
+          BACKGROUND
+          ===================================================== */}
 
             <div className="product-bg-glow product-bg-glow-one" />
+
             <div className="product-bg-glow product-bg-glow-two" />
 
             <div className="product-details-container">
 
-                {/* =================================================
-                    BACK TO COLLECTION
-                    ================================================= */}
+                {/* ===================================================
+            BACK BUTTON
+            =================================================== */}
 
                 <button
                     type="button"
                     className="product-back-button"
                     onClick={onBack}
                 >
-                    <span>←</span>
-                    <span>Back to Collection</span>
+                    <ArrowLeft size={17} />
+
+                    <span>
+                        Back to Collection
+                    </span>
                 </button>
 
-                {/* =================================================
-                    MAIN PRODUCT AREA
-                    ================================================= */}
+                {/* ===================================================
+            MAIN PRODUCT SECTION
+            =================================================== */}
 
-                <div className="product-details-layout">
+                <section className="product-details-layout">
 
                     {/* =================================================
-                        LEFT — PRODUCT CAROUSEL
-                        ================================================= */}
+              LEFT — GALLERY
+              ================================================= */}
 
-                    <section className="product-gallery">
+                    <div className="product-gallery">
 
                         <div className="product-gallery-layout">
 
-                            {/* =================================================
-                                THUMBNAILS
-                                ================================================= */}
+                            {/* =============================================
+                  THUMBNAILS
+                  ============================================= */}
 
                             <div className="product-thumbnails">
 
-                                {galleryImages.length > 0 &&
-                                    galleryImages.map(
-                                        (image, index) => (
-                                            <button
-                                                type="button"
-                                                key={`${image}-${index}`}
-                                                className={`product-thumbnail ${activeImage === index
+                                {galleryImages.map(
+                                    (image, index) => (
+                                        <button
+                                            type="button"
+                                            key={`${image}-${index}`}
+                                            className={`product-thumbnail ${activeImage === index
                                                     ? "active"
                                                     : ""
-                                                    }`}
-                                                onClick={() =>
-                                                    setActiveImage(index)
-                                                }
-                                                aria-label={`View product image ${index + 1
-                                                    }`}
-                                            >
-                                                <img
-                                                    src={image}
-                                                    alt={`${productName} ${index + 1
-                                                        }`}
-                                                />
-                                            </button>
-                                        )
-                                    )}
-
-                                {galleryImages.length > 1 && (
-                                    <button
-                                        type="button"
-                                        className="thumbnail-scroll-button"
-                                        onClick={goNext}
-                                        aria-label="Next image"
-                                    >
-                                        ↓
-                                    </button>
+                                                }`}
+                                            onClick={() =>
+                                                setActiveImage(index)
+                                            }
+                                        >
+                                            <img
+                                                src={image}
+                                                alt={`${productName} ${index + 1}`}
+                                            />
+                                        </button>
+                                    )
                                 )}
 
                             </div>
 
-                            {/* =================================================
-                                MAIN IMAGE
-                                ================================================= */}
+                            {/* =============================================
+                  MAIN IMAGE
+                  ============================================= */}
 
                             <div className="product-main-gallery">
 
                                 <div className="product-main-image-frame">
 
-                                    {galleryImages.length > 0 ? (
-                                        <img
-                                            key={
-                                                galleryImages[
-                                                activeImage
-                                                ]
-                                            }
-                                            src={
-                                                galleryImages[
-                                                activeImage
-                                                ]
-                                            }
-                                            alt={productName}
-                                            className="product-main-image"
-                                        />
-                                    ) : (
-                                        <div className="product-main-image-placeholder">
-                                            <span>FULVA</span>
-                                        </div>
-                                    )}
+                                    <img
+                                        key={galleryImages[activeImage]}
+                                        src={galleryImages[activeImage]}
+                                        alt={productName}
+                                        className="product-main-image"
+                                    />
 
                                     <div className="product-image-overlay" />
 
-                                    {/* Gold corners */}
+                                    {/* GOLD CORNERS */}
 
                                     <span className="image-corner image-corner-tl" />
                                     <span className="image-corner image-corner-tr" />
                                     <span className="image-corner image-corner-bl" />
                                     <span className="image-corner image-corner-br" />
 
-                                    {/* =================================================
-                                        PREVIOUS
-                                        ================================================= */}
+                                    {/* PREVIOUS */}
 
                                     {galleryImages.length > 1 && (
                                         <button
@@ -607,13 +423,11 @@ export default function ProductDetails({
                                             onClick={goPrevious}
                                             aria-label="Previous image"
                                         >
-                                            <ArrowLeft />
+                                            <ArrowLeft size={20} />
                                         </button>
                                     )}
 
-                                    {/* =================================================
-                                        NEXT
-                                        ================================================= */}
+                                    {/* NEXT */}
 
                                     {galleryImages.length > 1 && (
                                         <button
@@ -622,19 +436,16 @@ export default function ProductDetails({
                                             onClick={goNext}
                                             aria-label="Next image"
                                         >
-                                            <ArrowRight />
+                                            <ArrowRight size={20} />
                                         </button>
                                     )}
 
-                                    {/* =================================================
-                                        IMAGE COUNTER
-                                        ================================================= */}
+                                    {/* COUNTER */}
 
                                     <div className="gallery-counter">
+
                                         <span>
-                                            {galleryImages.length > 0
-                                                ? activeImage + 1
-                                                : 0}
+                                            {activeImage + 1}
                                         </span>
 
                                         <i>/</i>
@@ -642,18 +453,17 @@ export default function ProductDetails({
                                         <span>
                                             {galleryImages.length}
                                         </span>
+
                                     </div>
 
-                                    {/* =================================================
-                                        PROGRESS
-                                        ================================================= */}
+                                    {/* PROGRESS */}
 
                                     {galleryImages.length > 1 && (
                                         <div className="gallery-progress">
                                             <span
                                                 style={{
                                                     width: `${((activeImage + 1) /
-                                                        galleryImages.length) *
+                                                            galleryImages.length) *
                                                         100
                                                         }%`,
                                                 }}
@@ -667,63 +477,66 @@ export default function ProductDetails({
 
                         </div>
 
-                        {/* Gallery caption */}
-
                         <div className="product-gallery-caption">
-                            <span>FULVA</span>
+
+                            <span>
+                                FULVA
+                            </span>
 
                             <span>
                                 AUTHENTIC CALICUT HALWA
                             </span>
+
                         </div>
 
-                    </section>
+                    </div>
 
                     {/* =================================================
-                        RIGHT — PRODUCT INFORMATION
-                        ================================================= */}
+              RIGHT — INFORMATION
+              ================================================= */}
 
-                    <section className="product-information">
+                    <div className="product-information">
 
-                        {/* =================================================
-                            CATEGORY
-                            ================================================= */}
+                        {/* CATEGORY */}
 
                         <div className="product-category">
-                            <span>✦</span>
+
+                            <span>
+                                ✦
+                            </span>
 
                             <span>
                                 {productCategory}
                             </span>
+
                         </div>
 
-                        {/* =================================================
-                            PRODUCT NAME
-                            ================================================= */}
+                        {/* TITLE */}
 
                         <h1 className="product-detail-title">
                             {productName}
                         </h1>
 
-                        {/* =================================================
-                            PRODUCT TYPE
-                            ================================================= */}
+                        {/* TYPE */}
 
                         <div className="product-type">
-                            <span>•</span>
+
+                            <span>
+                                •
+                            </span>
 
                             <strong>
                                 {productType}
                             </strong>
+
                         </div>
 
-                        {/* =================================================
-                            PRICE + SHARE
-                            ================================================= */}
+                        {/* PRICE */}
 
                         <div className="product-price-section">
 
                             <div>
+
                                 <div className="product-price-row">
 
                                     <span className="product-current-price">
@@ -738,7 +551,10 @@ export default function ProductDetails({
 
                                     {productDiscount && (
                                         <span className="product-save-badge">
-                                            SAVE {productDiscount}
+                                            SAVE{" "}
+                                            {String(
+                                                productDiscount
+                                            ).replace("-", "")}
                                         </span>
                                     )}
 
@@ -757,7 +573,7 @@ export default function ProductDetails({
                                 className="product-share-button"
                                 onClick={handleShare}
                             >
-                                <ShareIcon />
+                                <Share2 size={17} />
 
                                 <span>
                                     Share
@@ -766,18 +582,14 @@ export default function ProductDetails({
 
                         </div>
 
-                        {/* =================================================
-                            TAX NOTE
-                            ================================================= */}
+                        {/* TAX */}
 
                         <p className="product-tax-note">
                             Inclusive of all taxes · Free delivery on
                             orders above ₹499
                         </p>
 
-                        {/* =================================================
-                            PRODUCT FACTS
-                            ================================================= */}
+                        {/* FACTS */}
 
                         <div className="product-facts">
 
@@ -785,11 +597,9 @@ export default function ProductDetails({
                                 {productShelfLife}
                             </span>
 
-                            {productWeight && (
-                                <span>
-                                    {productWeight}
-                                </span>
-                            )}
+                            <span>
+                                {productWeight}
+                            </span>
 
                             <span>
                                 {productDelivery}
@@ -797,25 +607,21 @@ export default function ProductDetails({
 
                         </div>
 
-                        {/* =================================================
-                            DIVIDER
-                            ================================================= */}
+                        {/* DIVIDER */}
 
                         <div className="product-divider">
-                            <span>◆</span>
+                            <span>
+                                ◆
+                            </span>
                         </div>
 
-                        {/* =================================================
-                            DESCRIPTION
-                            ================================================= */}
+                        {/* DESCRIPTION */}
 
                         <p className="product-description-line">
                             {productDescription}
                         </p>
 
-                        {/* =================================================
-                            COMBO OFFERS
-                            ================================================= */}
+                        {/* OFFERS */}
 
                         {offers.length > 0 && (
                             <div className="product-offers">
@@ -824,24 +630,20 @@ export default function ProductDetails({
                                     (offer, index) => (
                                         <div
                                             className={`product-offer ${index === 2
-                                                ? "featured-offer"
-                                                : ""
+                                                    ? "featured-offer"
+                                                    : ""
                                                 }`}
                                             key={
                                                 offer.title ||
-                                                `offer-${index}`
+                                                index
                                             }
                                         >
-
-                                            {/* Percentage */}
 
                                             {offer.percentage && (
                                                 <div className="offer-percent">
                                                     {offer.percentage}
                                                 </div>
                                             )}
-
-                                            {/* Offer text */}
 
                                             <div className="offer-content">
 
@@ -857,21 +659,17 @@ export default function ProductDetails({
 
                                             </div>
 
-                                            {/* Badge */}
-
                                             {offer.badge && (
                                                 <span
                                                     className={`offer-badge ${offer.badge ===
-                                                        "GREAT VALUE"
-                                                        ? "blue"
-                                                        : ""
+                                                            "GREAT VALUE"
+                                                            ? "blue"
+                                                            : ""
                                                         }`}
                                                 >
                                                     {offer.badge}
                                                 </span>
                                             )}
-
-                                            {/* Price */}
 
                                             {(offer.price ||
                                                 offer.oldPrice) && (
@@ -892,8 +690,6 @@ export default function ProductDetails({
                                                     </div>
                                                 )}
 
-                                            {/* Save */}
-
                                             {offer.save && (
                                                 <button
                                                     type="button"
@@ -910,9 +706,7 @@ export default function ProductDetails({
                             </div>
                         )}
 
-                        {/* =================================================
-                            COMBO NOTE
-                            ================================================= */}
+                        {/* COMBO NOTE */}
 
                         {offers.length > 0 && (
                             <p className="combo-note">
@@ -923,42 +717,37 @@ export default function ProductDetails({
                             </p>
                         )}
 
-                        {/* =================================================
-                            BUILD COMBO
-                            ================================================= */}
+                        {/* BUILD COMBO */}
 
                         <button
                             type="button"
                             className="build-combo-button"
                         >
-                            <span>＋</span>
+                            <Plus size={17} />
 
                             <strong>
                                 Build Your Own Combo
                             </strong>
                         </button>
 
-                        {/* =================================================
-                            ADD TO CART
-                            ================================================= */}
+                        {/* ADD CART */}
 
                         <button
                             type="button"
                             className="detail-add-cart"
                             onClick={handleAddToCart}
                         >
-                            <CartIcon />
+                            <ShoppingBag size={18} />
 
                             <span>
                                 Add to cart
                             </span>
                         </button>
 
-                        {/* =================================================
-                            OR
-                            ================================================= */}
+                        {/* OR */}
 
                         <div className="detail-or">
+
                             <span />
 
                             <em>
@@ -966,11 +755,10 @@ export default function ProductDetails({
                             </em>
 
                             <span />
+
                         </div>
 
-                        {/* =================================================
-                            BUY NOW
-                            ================================================= */}
+                        {/* BUY NOW */}
 
                         <div className="detail-buy-row">
 
@@ -988,7 +776,7 @@ export default function ProductDetails({
                                     }
                                     aria-label="Decrease quantity"
                                 >
-                                    −
+                                    <Minus size={14} />
                                 </button>
 
                                 <span>
@@ -1004,7 +792,7 @@ export default function ProductDetails({
                                     }
                                     aria-label="Increase quantity"
                                 >
-                                    +
+                                    <Plus size={14} />
                                 </button>
 
                             </div>
@@ -1018,28 +806,25 @@ export default function ProductDetails({
                                     Buy It Now
                                 </strong>
 
-                                <span>
-                                    →
-                                </span>
+                                <ArrowRight size={17} />
+
                             </button>
 
                         </div>
 
-                    </section>
+                    </div>
 
-                </div>
+                </section>
 
-                {/* =================================================
-                    TRUST / SERVICE STRIP
-                    ================================================= */}
+                {/* ===================================================
+            TRUST STRIP
+            =================================================== */}
 
                 <section className="product-trust-strip">
 
-                    {/* Delivery */}
-
                     <div className="product-trust-item">
 
-                        <TruckIcon />
+                        <Truck size={25} />
 
                         <div>
                             <strong>
@@ -1053,11 +838,9 @@ export default function ProductDetails({
 
                     </div>
 
-                    {/* Secure payment */}
-
                     <div className="product-trust-item">
 
-                        <ShieldIcon />
+                        <ShieldCheck size={25} />
 
                         <div>
                             <strong>
@@ -1071,11 +854,9 @@ export default function ProductDetails({
 
                     </div>
 
-                    {/* Quality */}
-
                     <div className="product-trust-item">
 
-                        <LeafIcon />
+                        <Leaf size={25} />
 
                         <div>
                             <strong>
@@ -1089,11 +870,9 @@ export default function ProductDetails({
 
                     </div>
 
-                    {/* Customers */}
-
                     <div className="product-trust-item">
 
-                        <PeopleIcon />
+                        <Users size={25} />
 
                         <div>
                             <strong>
@@ -1109,7 +888,261 @@ export default function ProductDetails({
 
                 </section>
 
+                {/* ===================================================
+            PRODUCT STORY
+            =================================================== */}
+
+                <section className="product-story-section">
+
+                    {/* SECTION LABEL */}
+
+                    <div className="product-story-heading">
+
+                        <span>
+                            THE FULVA EXPERIENCE
+                        </span>
+
+                        <h2>
+                            Crafted to be{" "}
+                            <em>
+                                remembered.
+                            </em>
+                        </h2>
+
+                        <p>
+                            A closer look at the texture, craft and
+                            indulgence behind every bite.
+                        </p>
+
+                    </div>
+
+                    {/* LARGE VISUAL */}
+
+                    <div className="product-story-visual">
+
+                        <img
+                            src={STORY_IMAGES[0]}
+                            alt="Fulva Halwa"
+                        />
+
+                        <div className="story-image-overlay" />
+
+                        <div className="story-visual-copy">
+
+                            <span>
+                                FULVA
+                            </span>
+
+                            <strong>
+                                Soft.
+                                <br />
+                                Smooth.
+                                <br />
+                                Unforgettable.
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    {/* STORY IMAGE STRIP */}
+
+                    <div className="product-story-image-grid">
+
+                        {STORY_IMAGES.slice(1).map(
+                            (image, index) => (
+                                <div
+                                    className="story-small-image"
+                                    key={image}
+                                >
+                                    <img
+                                        src={image}
+                                        alt={`${productName} detail ${index + 2
+                                            }`}
+                                    />
+                                </div>
+                            )
+                        )}
+
+                    </div>
+
+                </section>
+
+                {/* ===================================================
+            FAQ / PRODUCT INFORMATION ACCORDION
+            =================================================== */}
+
+                <section className="product-faq-section">
+
+                    <div className="product-faq-intro">
+
+                        <span>
+                            THE DETAILS
+                        </span>
+
+                        <h2>
+                            Everything you need
+                            <br />
+                            <em>to know.</em>
+                        </h2>
+
+                    </div>
+
+                    <div className="product-faq-list">
+
+                        {DEFAULT_FAQS.map(
+                            (faq, index) => {
+                                const isOpen =
+                                    openFaq === index;
+
+                                return (
+                                    <div
+                                        className={`product-faq-item ${isOpen
+                                                ? "open"
+                                                : ""
+                                            }`}
+                                        key={faq.title}
+                                    >
+
+                                        <button
+                                            type="button"
+                                            className="product-faq-trigger"
+                                            onClick={() =>
+                                                toggleFaq(index)
+                                            }
+                                            aria-expanded={isOpen}
+                                        >
+
+                                            <span>
+                                                {faq.title}
+                                            </span>
+
+                                            <span className="faq-icon">
+
+                                                {isOpen ? (
+                                                    <Minus size={18} />
+                                                ) : (
+                                                    <Plus size={18} />
+                                                )}
+
+                                            </span>
+
+                                        </button>
+
+                                        <div
+                                            className="product-faq-content"
+                                        >
+
+                                            <div>
+
+                                                <ul>
+                                                    {faq.content.map(
+                                                        (line) => (
+                                                            <li key={line}>
+                                                                {line}
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ul>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                );
+                            }
+                        )}
+
+                    </div>
+
+                </section>
+
             </div>
+
+            {/* =====================================================
+          STICKY PRODUCT TOAST
+          ===================================================== */}
+
+            {toastVisible && (
+                <div className="sticky-product-toast">
+
+                    {/* IMAGE */}
+
+                    <div className="sticky-toast-image">
+
+                        <img
+                            src={
+                                product.image ||
+                                galleryImages[0]
+                            }
+                            alt={productName}
+                        />
+
+                    </div>
+
+                    {/* INFO */}
+
+                    <div className="sticky-toast-info">
+
+                        <div className="sticky-toast-name">
+                            {productName}
+                        </div>
+
+                        <div className="sticky-toast-price-row">
+
+                            <span className="sticky-toast-price">
+                                {productPrice}
+                            </span>
+
+                            {productOldPrice && (
+                                <span className="sticky-toast-original">
+                                    {productOldPrice}
+                                </span>
+                            )}
+
+                            {productDiscount && (
+                                <span className="sticky-toast-discount">
+                                    SAVE{" "}
+                                    {String(
+                                        productDiscount
+                                    ).replace("-", "")}
+                                </span>
+                            )}
+
+                        </div>
+
+                    </div>
+
+                    {/* ADD CART */}
+
+                    <button
+                        type="button"
+                        className="sticky-toast-cart"
+                        onClick={handleAddToCart}
+                    >
+                        <ShoppingBag size={17} />
+
+                        <span>
+                            Add to cart
+                        </span>
+                    </button>
+
+                    {/* CLOSE */}
+
+                    <button
+                        type="button"
+                        className="sticky-toast-close"
+                        onClick={() =>
+                            setToastVisible(false)
+                        }
+                        aria-label="Close"
+                    >
+                        <X size={15} />
+                    </button>
+
+                </div>
+            )}
 
         </main>
     );
