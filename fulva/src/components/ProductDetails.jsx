@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import {
     ArrowLeft,
     ArrowRight,
-    ChevronDown,
     ShoppingBag,
     Share2,
     Truck,
@@ -12,8 +11,13 @@ import {
     Plus,
     Minus,
     X,
+    Star,
 } from "lucide-react";
+
 import "./ProductDetails.css";
+
+import Footer from "./Footer";
+import { PRODUCTS } from "./PopularProducts";
 
 /* =========================================================
    SHARED PRODUCT DETAIL IMAGES
@@ -28,9 +32,6 @@ const SHARED_DETAIL_IMAGES = [
 
 /* =========================================================
    PRODUCT STORY IMAGES
-
-   Same images for every product for now.
-   We can make these product-specific later.
    ========================================================= */
 
 const STORY_IMAGES = [
@@ -41,7 +42,7 @@ const STORY_IMAGES = [
 ];
 
 /* =========================================================
-   DEFAULT FAQ CONTENT
+   FAQ CONTENT
    ========================================================= */
 
 const DEFAULT_FAQS = [
@@ -54,6 +55,7 @@ const DEFAULT_FAQS = [
             "Vegetarian",
         ],
     },
+
     {
         title: "WHAT MAKES THIS HALWA SPECIAL",
         content: [
@@ -65,6 +67,7 @@ const DEFAULT_FAQS = [
             "Perfect for gifting & celebrations",
         ],
     },
+
     {
         title: "INGREDIENTS",
         content: [
@@ -73,6 +76,7 @@ const DEFAULT_FAQS = [
             "This food item contains corn flour & nuts.",
         ],
     },
+
     {
         title: "SHIPPING",
         content: [
@@ -89,12 +93,32 @@ const DEFAULT_FAQS = [
 ];
 
 /* =========================================================
+   RANDOM RECOMMENDATIONS
+   ========================================================= */
+
+function getRandomRecommendations(currentProduct) {
+    if (!Array.isArray(PRODUCTS)) return [];
+
+    const availableProducts = PRODUCTS.filter(
+        (item) =>
+            item.id !== currentProduct?.id
+    );
+
+    const shuffled = [...availableProducts].sort(
+        () => Math.random() - 0.5
+    );
+
+    return shuffled.slice(0, 4);
+}
+
+/* =========================================================
    PRODUCT DETAILS
    ========================================================= */
 
 export default function ProductDetails({
     product,
     onBack,
+    onProductClick,
 }) {
     /* =======================================================
        STATE
@@ -104,6 +128,8 @@ export default function ProductDetails({
     const [quantity, setQuantity] = useState(1);
     const [openFaq, setOpenFaq] = useState(null);
     const [toastVisible, setToastVisible] = useState(true);
+    const [recommendations, setRecommendations] =
+        useState([]);
 
     /* =======================================================
        PRODUCT FALLBACK
@@ -113,7 +139,10 @@ export default function ProductDetails({
         return (
             <main className="product-details-page">
                 <div className="product-details-error">
-                    <p>Product not found.</p>
+
+                    <p>
+                        Product not found.
+                    </p>
 
                     <button
                         type="button"
@@ -122,6 +151,7 @@ export default function ProductDetails({
                         <ArrowLeft size={17} />
                         Back to Collection
                     </button>
+
                 </div>
             </main>
         );
@@ -178,15 +208,9 @@ export default function ProductDetails({
         "Authentic Kozhikoden Halwa, handcrafted with traditional recipes and premium ingredients.";
 
     /* =======================================================
-       PRODUCT IMAGES
+       GALLERY
   
-       IMPORTANT:
-       If product.images exists, use it.
-  
-       Otherwise:
-         product cover image
-         +
-         shared pdt images
+       Product's own images take priority.
        ======================================================= */
 
     const galleryImages = useMemo(() => {
@@ -217,7 +241,19 @@ export default function ProductDetails({
             : [];
 
     /* =======================================================
-       RESET WHEN PRODUCT CHANGES
+       RANDOM RECOMMENDATIONS
+  
+       Re-generated whenever product changes.
+       ======================================================= */
+
+    useEffect(() => {
+        setRecommendations(
+            getRandomRecommendations(product)
+        );
+    }, [product]);
+
+    /* =======================================================
+       RESET PRODUCT STATE
        ======================================================= */
 
     useEffect(() => {
@@ -237,6 +273,8 @@ export default function ProductDetails({
        ======================================================= */
 
     const goPrevious = () => {
+        if (galleryImages.length <= 1) return;
+
         setActiveImage((current) =>
             current === 0
                 ? galleryImages.length - 1
@@ -245,6 +283,8 @@ export default function ProductDetails({
     };
 
     const goNext = () => {
+        if (galleryImages.length <= 1) return;
+
         setActiveImage((current) =>
             current === galleryImages.length - 1
                 ? 0
@@ -270,7 +310,7 @@ export default function ProductDetails({
                 );
             }
         } catch {
-            // User cancelled share.
+            // User cancelled sharing.
         }
     };
 
@@ -315,15 +355,29 @@ export default function ProductDetails({
     };
 
     /* =======================================================
+       RECOMMENDATION CLICK
+       ======================================================= */
+
+    const handleRecommendationClick = (
+        recommendedProduct
+    ) => {
+        if (!onProductClick) return;
+
+        onProductClick(
+            recommendedProduct
+        );
+    };
+
+    /* =======================================================
        RENDER
        ======================================================= */
 
     return (
         <main className="product-details-page">
 
-            {/* =====================================================
+            {/* ===================================================
           BACKGROUND
-          ===================================================== */}
+          =================================================== */}
 
             <div className="product-bg-glow product-bg-glow-one" />
 
@@ -331,9 +385,9 @@ export default function ProductDetails({
 
             <div className="product-details-container">
 
-                {/* ===================================================
-            BACK BUTTON
-            =================================================== */}
+                {/* =================================================
+            BACK
+            ================================================= */}
 
                 <button
                     type="button"
@@ -347,23 +401,19 @@ export default function ProductDetails({
                     </span>
                 </button>
 
-                {/* ===================================================
-            MAIN PRODUCT SECTION
-            =================================================== */}
+                {/* =================================================
+            MAIN PRODUCT
+            ================================================= */}
 
                 <section className="product-details-layout">
 
                     {/* =================================================
-              LEFT — GALLERY
+              GALLERY
               ================================================= */}
 
                     <div className="product-gallery">
 
                         <div className="product-gallery-layout">
-
-                            {/* =============================================
-                  THUMBNAILS
-                  ============================================= */}
 
                             <div className="product-thumbnails">
 
@@ -373,8 +423,8 @@ export default function ProductDetails({
                                             type="button"
                                             key={`${image}-${index}`}
                                             className={`product-thumbnail ${activeImage === index
-                                                    ? "active"
-                                                    : ""
+                                                ? "active"
+                                                : ""
                                                 }`}
                                             onClick={() =>
                                                 setActiveImage(index)
@@ -382,7 +432,8 @@ export default function ProductDetails({
                                         >
                                             <img
                                                 src={image}
-                                                alt={`${productName} ${index + 1}`}
+                                                alt={`${productName} ${index + 1
+                                                    }`}
                                             />
                                         </button>
                                     )
@@ -390,60 +441,49 @@ export default function ProductDetails({
 
                             </div>
 
-                            {/* =============================================
-                  MAIN IMAGE
-                  ============================================= */}
-
                             <div className="product-main-gallery">
 
                                 <div className="product-main-image-frame">
 
                                     <img
                                         key={galleryImages[activeImage]}
-                                        src={galleryImages[activeImage]}
+                                        src={
+                                            galleryImages[activeImage]
+                                        }
                                         alt={productName}
                                         className="product-main-image"
                                     />
 
                                     <div className="product-image-overlay" />
 
-                                    {/* GOLD CORNERS */}
-
                                     <span className="image-corner image-corner-tl" />
                                     <span className="image-corner image-corner-tr" />
                                     <span className="image-corner image-corner-bl" />
                                     <span className="image-corner image-corner-br" />
 
-                                    {/* PREVIOUS */}
-
                                     {galleryImages.length > 1 && (
-                                        <button
-                                            type="button"
-                                            className="gallery-arrow gallery-arrow-left"
-                                            onClick={goPrevious}
-                                            aria-label="Previous image"
-                                        >
-                                            <ArrowLeft size={20} />
-                                        </button>
+                                        <>
+                                            <button
+                                                type="button"
+                                                className="gallery-arrow gallery-arrow-left"
+                                                onClick={goPrevious}
+                                                aria-label="Previous image"
+                                            >
+                                                <ArrowLeft size={20} />
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                className="gallery-arrow gallery-arrow-right"
+                                                onClick={goNext}
+                                                aria-label="Next image"
+                                            >
+                                                <ArrowRight size={20} />
+                                            </button>
+                                        </>
                                     )}
-
-                                    {/* NEXT */}
-
-                                    {galleryImages.length > 1 && (
-                                        <button
-                                            type="button"
-                                            className="gallery-arrow gallery-arrow-right"
-                                            onClick={goNext}
-                                            aria-label="Next image"
-                                        >
-                                            <ArrowRight size={20} />
-                                        </button>
-                                    )}
-
-                                    {/* COUNTER */}
 
                                     <div className="gallery-counter">
-
                                         <span>
                                             {activeImage + 1}
                                         </span>
@@ -453,17 +493,14 @@ export default function ProductDetails({
                                         <span>
                                             {galleryImages.length}
                                         </span>
-
                                     </div>
-
-                                    {/* PROGRESS */}
 
                                     {galleryImages.length > 1 && (
                                         <div className="gallery-progress">
                                             <span
                                                 style={{
                                                     width: `${((activeImage + 1) /
-                                                            galleryImages.length) *
+                                                        galleryImages.length) *
                                                         100
                                                         }%`,
                                                 }}
@@ -478,7 +515,6 @@ export default function ProductDetails({
                         </div>
 
                         <div className="product-gallery-caption">
-
                             <span>
                                 FULVA
                             </span>
@@ -486,18 +522,15 @@ export default function ProductDetails({
                             <span>
                                 AUTHENTIC CALICUT HALWA
                             </span>
-
                         </div>
 
                     </div>
 
                     {/* =================================================
-              RIGHT — INFORMATION
+              INFORMATION
               ================================================= */}
 
                     <div className="product-information">
-
-                        {/* CATEGORY */}
 
                         <div className="product-category">
 
@@ -511,13 +544,9 @@ export default function ProductDetails({
 
                         </div>
 
-                        {/* TITLE */}
-
                         <h1 className="product-detail-title">
                             {productName}
                         </h1>
-
-                        {/* TYPE */}
 
                         <div className="product-type">
 
@@ -530,8 +559,6 @@ export default function ProductDetails({
                             </strong>
 
                         </div>
-
-                        {/* PRICE */}
 
                         <div className="product-price-section">
 
@@ -582,14 +609,10 @@ export default function ProductDetails({
 
                         </div>
 
-                        {/* TAX */}
-
                         <p className="product-tax-note">
-                            Inclusive of all taxes · Free delivery on
-                            orders above ₹499
+                            Inclusive of all taxes · Free delivery
+                            on orders above ₹499
                         </p>
-
-                        {/* FACTS */}
 
                         <div className="product-facts">
 
@@ -607,21 +630,15 @@ export default function ProductDetails({
 
                         </div>
 
-                        {/* DIVIDER */}
-
                         <div className="product-divider">
                             <span>
                                 ◆
                             </span>
                         </div>
 
-                        {/* DESCRIPTION */}
-
                         <p className="product-description-line">
                             {productDescription}
                         </p>
-
-                        {/* OFFERS */}
 
                         {offers.length > 0 && (
                             <div className="product-offers">
@@ -630,8 +647,8 @@ export default function ProductDetails({
                                     (offer, index) => (
                                         <div
                                             className={`product-offer ${index === 2
-                                                    ? "featured-offer"
-                                                    : ""
+                                                ? "featured-offer"
+                                                : ""
                                                 }`}
                                             key={
                                                 offer.title ||
@@ -660,13 +677,7 @@ export default function ProductDetails({
                                             </div>
 
                                             {offer.badge && (
-                                                <span
-                                                    className={`offer-badge ${offer.badge ===
-                                                            "GREAT VALUE"
-                                                            ? "blue"
-                                                            : ""
-                                                        }`}
-                                                >
+                                                <span className="offer-badge">
                                                     {offer.badge}
                                                 </span>
                                             )}
@@ -706,8 +717,6 @@ export default function ProductDetails({
                             </div>
                         )}
 
-                        {/* COMBO NOTE */}
-
                         {offers.length > 0 && (
                             <p className="combo-note">
                                 Mix any flavours you like —{" "}
@@ -716,8 +725,6 @@ export default function ProductDetails({
                                 </strong>
                             </p>
                         )}
-
-                        {/* BUILD COMBO */}
 
                         <button
                             type="button"
@@ -729,8 +736,6 @@ export default function ProductDetails({
                                 Build Your Own Combo
                             </strong>
                         </button>
-
-                        {/* ADD CART */}
 
                         <button
                             type="button"
@@ -744,8 +749,6 @@ export default function ProductDetails({
                             </span>
                         </button>
 
-                        {/* OR */}
-
                         <div className="detail-or">
 
                             <span />
@@ -757,8 +760,6 @@ export default function ProductDetails({
                             <span />
 
                         </div>
-
-                        {/* BUY NOW */}
 
                         <div className="detail-buy-row">
 
@@ -774,7 +775,6 @@ export default function ProductDetails({
                                             )
                                         )
                                     }
-                                    aria-label="Decrease quantity"
                                 >
                                     <Minus size={14} />
                                 </button>
@@ -790,7 +790,6 @@ export default function ProductDetails({
                                             quantity + 1
                                         )
                                     }
-                                    aria-label="Increase quantity"
                                 >
                                     <Plus size={14} />
                                 </button>
@@ -816,9 +815,9 @@ export default function ProductDetails({
 
                 </section>
 
-                {/* ===================================================
+                {/* =================================================
             TRUST STRIP
-            =================================================== */}
+            ================================================= */}
 
                 <section className="product-trust-strip">
 
@@ -888,13 +887,11 @@ export default function ProductDetails({
 
                 </section>
 
-                {/* ===================================================
+                {/* =================================================
             PRODUCT STORY
-            =================================================== */}
+            ================================================= */}
 
                 <section className="product-story-section">
-
-                    {/* SECTION LABEL */}
 
                     <div className="product-story-heading">
 
@@ -916,13 +913,11 @@ export default function ProductDetails({
 
                     </div>
 
-                    {/* LARGE VISUAL */}
-
                     <div className="product-story-visual">
 
                         <img
                             src={STORY_IMAGES[0]}
-                            alt="Fulva Halwa"
+                            alt={productName}
                         />
 
                         <div className="story-image-overlay" />
@@ -945,8 +940,6 @@ export default function ProductDetails({
 
                     </div>
 
-                    {/* STORY IMAGE STRIP */}
-
                     <div className="product-story-image-grid">
 
                         {STORY_IMAGES.slice(1).map(
@@ -968,9 +961,9 @@ export default function ProductDetails({
 
                 </section>
 
-                {/* ===================================================
-            FAQ / PRODUCT INFORMATION ACCORDION
-            =================================================== */}
+                {/* =================================================
+            FAQ
+            ================================================= */}
 
                 <section className="product-faq-section">
 
@@ -983,7 +976,9 @@ export default function ProductDetails({
                         <h2>
                             Everything you need
                             <br />
-                            <em>to know.</em>
+                            <em>
+                                to know.
+                            </em>
                         </h2>
 
                     </div>
@@ -992,14 +987,15 @@ export default function ProductDetails({
 
                         {DEFAULT_FAQS.map(
                             (faq, index) => {
+
                                 const isOpen =
                                     openFaq === index;
 
                                 return (
                                     <div
                                         className={`product-faq-item ${isOpen
-                                                ? "open"
-                                                : ""
+                                            ? "open"
+                                            : ""
                                             }`}
                                         key={faq.title}
                                     >
@@ -1029,13 +1025,12 @@ export default function ProductDetails({
 
                                         </button>
 
-                                        <div
-                                            className="product-faq-content"
-                                        >
+                                        <div className="product-faq-content">
 
                                             <div>
 
                                                 <ul>
+
                                                     {faq.content.map(
                                                         (line) => (
                                                             <li key={line}>
@@ -1043,6 +1038,7 @@ export default function ProductDetails({
                                                             </li>
                                                         )
                                                     )}
+
                                                 </ul>
 
                                             </div>
@@ -1058,16 +1054,235 @@ export default function ProductDetails({
 
                 </section>
 
+                {/* =================================================
+            RECOMMENDATIONS
+            ================================================= */}
+
+                <section className="product-recommendations">
+
+                    <div className="recommendations-header">
+                        <div className="recommendations-heading">
+                            <span className="recommendations-eyebrow">
+                                DISCOVER MORE
+                            </span>
+
+                            <h2>
+                                You may also <em>like.</em>
+                            </h2>
+
+                            <p>
+                                Explore more of our handcrafted Kozhikoden favourites.
+                            </p>
+                        </div>
+
+                        <div className="recommendations-actions">
+                            <button
+                                type="button"
+                                className="recommendations-arrow"
+                                aria-label="Previous products"
+                            >
+                                <ArrowLeft size={17} />
+                            </button>
+
+                            <button
+                                type="button"
+                                className="recommendations-arrow"
+                                aria-label="Next products"
+                            >
+                                <ArrowRight size={17} />
+                            </button>
+
+                            <button
+                                type="button"
+                                className="recommendations-view-all"
+                                onClick={onBack}
+                            >
+                                <span>View All Products</span>
+                                <ArrowRight size={17} />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="recommendations-grid">
+
+                        {recommendations.map(
+                            (recommendedProduct) => (
+
+                                <article
+                                    className="recommendation-card"
+                                    key={recommendedProduct.id}
+                                    onClick={() =>
+                                        handleRecommendationClick(
+                                            recommendedProduct
+                                        )
+                                    }
+                                    role="button"
+                                    tabIndex={0}
+                                    onKeyDown={(event) => {
+
+                                        if (
+                                            event.key === "Enter" ||
+                                            event.key === " "
+                                        ) {
+                                            event.preventDefault();
+
+                                            handleRecommendationClick(
+                                                recommendedProduct
+                                            );
+                                        }
+
+                                    }}
+                                >
+
+                                    <div className="recommendation-image">
+
+                                        <img
+                                            src={
+                                                recommendedProduct.image ||
+                                                recommendedProduct.images?.[0]
+                                            }
+                                            alt={
+                                                recommendedProduct.name ||
+                                                recommendedProduct.title
+                                            }
+                                        />
+
+                                        {recommendedProduct.discount && (
+                                            <span className="recommendation-discount">
+                                                {recommendedProduct.discount}
+                                            </span>
+                                        )}
+
+                                    </div>
+
+                                    <div className="recommendation-info">
+
+                                        <span className="recommendation-category">
+                                            {recommendedProduct.category ||
+                                                "FULVA COLLECTION"}
+                                        </span>
+
+                                        <h3>
+                                            {recommendedProduct.name ||
+                                                recommendedProduct.title}
+                                        </h3>
+
+                                        <div className="recommendation-price">
+
+                                            <strong>
+                                                {recommendedProduct.price}
+                                            </strong>
+
+                                            {(recommendedProduct.oldPrice ||
+                                                recommendedProduct.originalPrice) && (
+                                                    <del>
+                                                        {recommendedProduct.oldPrice ||
+                                                            recommendedProduct.originalPrice}
+                                                    </del>
+                                                )}
+
+                                        </div>
+
+                                        <button
+                                            type="button"
+                                            className="recommendation-view"
+                                            onClick={(event) => {
+                                                event.stopPropagation();
+
+                                                handleRecommendationClick(
+                                                    recommendedProduct
+                                                );
+                                            }}
+                                        >
+                                            View Product
+                                            <ArrowRight size={16} />
+                                        </button>
+
+                                    </div>
+
+                                </article>
+
+                            )
+                        )}
+
+                    </div>
+
+                </section>
+
             </div>
 
-            {/* =====================================================
+            {/* ===================================================
+          CUSTOMER REVIEWS
+          =================================================== */}
+
+            <section className="product-customer-reviews">
+
+                <div className="product-reviews-heading">
+
+                    <div className="product-reviews-eyebrow">
+
+                        <span />
+
+                        <span>
+                            REAL PEOPLE, REAL LOVE
+                        </span>
+
+                        <span />
+
+                    </div>
+
+                    <h2>
+                        What Our Customers{" "}
+                        <em>
+                            Say
+                        </em>
+                    </h2>
+
+                    <div className="product-reviews-trust">
+
+                        <Star
+                            size={15}
+                            fill="currentColor"
+                        />
+
+                        <span>
+                            Trusted by 80,000+ Customers
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div className="product-empty-review">
+
+                    <p>
+                        Be the first to write a review
+                    </p>
+
+                    <button
+                        type="button"
+                        className="product-write-review"
+                    >
+                        Write a review
+                    </button>
+
+                </div>
+
+            </section>
+
+            {/* ===================================================
+          FOOTER
+          =================================================== */}
+
+            <Footer />
+
+            {/* ===================================================
           STICKY PRODUCT TOAST
-          ===================================================== */}
+          =================================================== */}
 
             {toastVisible && (
-                <div className="sticky-product-toast">
 
-                    {/* IMAGE */}
+                <div className="sticky-product-toast">
 
                     <div className="sticky-toast-image">
 
@@ -1080,8 +1295,6 @@ export default function ProductDetails({
                         />
 
                     </div>
-
-                    {/* INFO */}
 
                     <div className="sticky-toast-info">
 
@@ -1114,8 +1327,6 @@ export default function ProductDetails({
 
                     </div>
 
-                    {/* ADD CART */}
-
                     <button
                         type="button"
                         className="sticky-toast-cart"
@@ -1127,8 +1338,6 @@ export default function ProductDetails({
                             Add to cart
                         </span>
                     </button>
-
-                    {/* CLOSE */}
 
                     <button
                         type="button"
@@ -1142,6 +1351,7 @@ export default function ProductDetails({
                     </button>
 
                 </div>
+
             )}
 
         </main>

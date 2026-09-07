@@ -35,7 +35,7 @@ const DETAIL_IMAGES = [
    POPULAR PRODUCTS DATA
    ========================================================= */
 
-const PRODUCTS = [
+export const PRODUCTS = [
   {
     id: '24-premium',
 
@@ -667,8 +667,8 @@ export default function PopularProducts({
                   <button
                     type="button"
                     className={`card-add-btn ${addedItems[product.id]
-                        ? 'added'
-                        : ''
+                      ? 'added'
+                      : ''
                       }`}
                     onClick={(event) =>
                       handleAddToCart(
