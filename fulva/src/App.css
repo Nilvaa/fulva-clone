@@ -2977,3 +2977,25 @@ body {
     0 5px 18px rgba(185, 143, 48, 0.22),
     inset 0 1px 0 rgba(255, 238, 176, 0.45);
 }
+
+/* =========================================================
+   CLICKABLE PRODUCT CARD
+   ========================================================= */
+
+.shop-card-clickable {
+  cursor: pointer;
+}
+
+.shop-card-clickable:focus-visible {
+  outline: 1px solid rgba(212, 177, 92, 0.8);
+  outline-offset: 5px;
+}
+
+.shop-card-clickable:hover .shop-card-image {
+  transform: scale(1.035);
+}
+
+.shop-card-clickable:hover .shop-gold-ring {
+  opacity: 1;
+  transform: scale(1.03);
+}
