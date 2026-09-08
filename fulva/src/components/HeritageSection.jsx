@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import "./HeritageSection.css";
-
-const storyImage = "src/assets/images/story-fulva.png";
+import storyImage from "../assets/images/story-fulva.png";
 
 export default function HeritageSection() {
     return (
